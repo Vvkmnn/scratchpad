@@ -1,4 +1,4 @@
-# Excel Tricks
+# Excel
 
 ## Hotkeys
 

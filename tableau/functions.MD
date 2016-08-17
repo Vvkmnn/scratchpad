@@ -1,6 +1,6 @@
-# Tableau Calculated Fields
+# Tableau
 
-## Functions
+## Calculated Fields
 
 ### Calculate the actual weekday name for a field
 ```
