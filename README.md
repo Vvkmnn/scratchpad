@@ -1,11 +1,21 @@
 misc
 ======
 
-Just some code/recipes I've randomly built or found. Feel free to take what you need, and leave what you like.
+Just some code/recipes I've randomly built or found.
 
-### Javascript
+I also like to toss in interesting repos/code for later exploration.
 
-The snippets in here are primarily designed for use in [Google Tag Manager](https://www.google.ca/analytics/tag-manager/), which I use often in my work projects. It is significantly influenced by the amazing work of [Simo Ahava](http://www.simoahava.com/).
+## Todo
+
+- [ ] [Look at more of the free books in here](https://github.com/vhf/free-programming-books/blob/master/free-programming-books.md#julia)
+- [x] [Play with my git board](https://github.com/mohebifar/grafgiti)
+- [x] [Use more selfhosted software](https://github.com/Kickball/awesome-selfhosted)
+- [x] [Download some more macOS apps](https://github.com/iCHAIT/awesome-macOS) (and [m-cli](https://github.com/rgcr/m-cli))
+- [ ] Get better at [Git](https://leanpub.com/progitreedited) and [understand](http://marklodato.github.io/visual-git-guide/index-en.html) how it [works](https://jwiegley.github.io/git-from-the-bottom-up/)
+- [ ] Apply [Julia to Quantitative Economics](http://quant-econ.net/jl/learning_julia.html) and other [problems](http://github.com)
+- [ ] [Download Input and see how it works on Atom](https://gist.github.com/eins78/a8dde1eb0d10963a65e7)
+- [ ] Read @thejameskyle's amazing guides on compilers and data structures
+- [ ] Translate more of my [Leanpub](https://leanpub.com) library into code
 
 ## License
 
