@@ -14,6 +14,8 @@ I also like to toss in interesting repos/code for later exploration.
 - [ ] Get better at [Git](https://leanpub.com/progitreedited) and [understand](http://marklodato.github.io/visual-git-guide/index-en.html) how it [works](https://jwiegley.github.io/git-from-the-bottom-up/), maybe play with [some tools](https://github.com/jlord/git-it-electron)?
 - [ ] Apply [Julia to Quantitative Economics](http://quant-econ.net/jl/learning_julia.html) and other [problems](http://github.com)
 - [ ] [Download Input and see how it works on Atom](https://gist.github.com/eins78/a8dde1eb0d10963a65e7)
+- [ ] Go through this [cool Tensorflow tutorial](https://github.com/alrojo/tensorflow-tutorial)
+- [ ] Adapt backpropNeat to Python
 - [ ] Read @thejameskyle's amazing guides on compilers and data structures
 - [ ] Translate more of my [Leanpub](https://leanpub.com) library into code
 - [ ] Explore more [awesome](https://github.com/sindresorhus/awesome) [lists](https://github.com/jnv/lists)
