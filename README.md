@@ -20,6 +20,7 @@ I also like to toss in interesting repos/code for later exploration.
 - [ ] Translate more of my [Leanpub](https://leanpub.com) library into code
 - [ ] Explore more [awesome](https://github.com/sindresorhus/awesome) [lists](https://github.com/jnv/lists)
 - [ ] Check out these [funny Markov Chains](https://github.com/sublimino/awesome-funny-markov)
+- [ ] Work through the code for @dennybritz's [Retrieval Based Chatbot Model using LTSMs and Tensorflow](https://github.com/dennybritz/chatbot-retrieval/)
 ## License
 
 Licensed under [Creative Commons](https://creativecommons.org/licenses/).
