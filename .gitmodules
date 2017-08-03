@@ -1,0 +1,3 @@
+[submodule "python/algorithms"]
+	path = python/algorithms
+	url = https://github.com/keon/algorithms
