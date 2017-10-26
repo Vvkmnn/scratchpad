@@ -23,23 +23,22 @@ bash/
 │   └── ohshitgit/                     : Oh shit git!
 │
 ├── javascript/
-│   ├── backpropNEAT/                  : An amazing simulation of Backprop Neuroevolution from @hardmaru
-│   ├── GoogleTagManager/              : A couple things I wrote for Google Tag Manager to track Custom Event behavior in Google Analytics
-│   ├── ItsyBitsyDataStructures/       : "Super simplified examples of many of the common data structures written in easy to read JavaScript" - @thejameskyle
-│   └── TheSuperTinyCompiler/          : "Ultra-simplified example of all the major pieces of a modern compiler written in easy to read JavaScript" - @thejameskyle
+│   ├── backpropNEAT/                  : "Neural Network Evolution Playground with Backprop NEAT" - @hardmaru
+│   ├── ItsyBitsyDataStructures/       : "All the things you didn't know you wanted to know about data structures" - @thejameskyle
+│   └── TheSuperTinyCompiler/          : "Possibly the smallest compiler ever" - @thejameskyle
 │
 ├── julia/
 │   └── helloJulia/                    : Hello Julia!
 │
 ├── latex/
-│   ├── cv/                            : I like to write my resume in (French?) LaTeX.
-│   └── TiesAsAServices                : A pet project I wrote to learn more R and get into Hootsuite. I didn't get into Hootsuite.
+│   ├── cv/                            : A resume in  LaTeX.
+│   └── TiesAsAServices                : A pet project to learn more R and get into Hootsuite. I didn't get into Hootsuite.
 │
 ├── markdown/
 │
 ├── matlab/
-│   ├── bitcoinFractals/               : The code behind my 2013 paper on "Multifractal Behavior in Bitcoin Pricing"; some of my first/shittiest code ever! 
-│   └── neuralNetworks/                : The code behind my 2014 Medium post on neural networks, and my first interactions with their architecture.
+│   ├── bitcoinFractals/               : The code behind my 2014 paper "Multifractal Behavior in Bitcoin Pricing"; some of my first/shittiest code ever! 
+│   └── neuralNetworks/                : The code behind my 2013 Medium post "My First Neural Network"
 │
 ├── python/
 │   ├── 12StepstoScientificPythonCode/ : Some useful tips on writing clean Python code. Currently on step 1, lol.
@@ -49,7 +48,8 @@ bash/
 │   ├── hackerRank/                    : Stuff from my Hackerrank practice!
 │   ├── intermediatePython/            : Notes from someone who is better at Python than me.
 │   ├── kaggle/                        : Kaggle notebooks. 
-│   ├── kerasDeepLearning/             : A robust intro to Deep Learning via Keras from @leriomaggio
+│   ├── kerasDeepLearning/             : "Introduction to Deep Neural Networks with Keras and Tensorflow
+" - @leriomaggio
 │   ├── pyCrumbs/                      : "Bits and bytes of Python from the Internet" - @kirang89
 │   └── tensorflowExamples/            : "TensorFlow Tutorial and Examples for Beginners with Latest APIs" - @aymericdamien 
 │
