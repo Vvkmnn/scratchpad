@@ -28,7 +28,7 @@ scratchpad/
 │   └── TheSuperTinyCompiler/          : "Possibly the smallest compiler ever" - @thejameskyle
 │
 ├── julia/
-│   └── helloJulia/                    : Hello Julia!
+│   └── JuliaByExample/                : "Examples of Julia" - @samuelcolvin
 │
 ├── latex/
 │   ├── cv/                            : A resume in  LaTeX.
