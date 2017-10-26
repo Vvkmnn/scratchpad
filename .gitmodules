@@ -31,3 +31,6 @@
 [submodule "python/tensorFlowExamples"]
 	path = python/tensorFlowExamples
 	url = https://github.com/aymericdamien/TensorFlow-Examples
+[submodule "julia/JuliaByExample"]
+	path = julia/JuliaByExample
+	url = https://github.com/samuelcolvin/JuliaByExample
