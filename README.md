@@ -5,7 +5,7 @@ Code I'm tinkering with, typically borrowed from kind strangers.
 
 
 ```
-bash/
+scratchpad/
 ├── bash/                   
 │   ├── bash-guide/                    : A quick guide to the Bash Shell.
 │   └── bash-commands/                 : Some of the most popular Bash commands!
