@@ -48,8 +48,7 @@ bash/
 │   ├── hackerRank/                    : Stuff from my Hackerrank practice!
 │   ├── intermediatePython/            : Notes from someone who is better at Python than me.
 │   ├── kaggle/                        : Kaggle notebooks. 
-│   ├── kerasDeepLearning/             : "Introduction to Deep Neural Networks with Keras and Tensorflow
-" - @leriomaggio
+│   ├── kerasDeepLearning/             : "Introduction to Deep Neural Networks with Keras and Tensorflow" - @leriomaggio
 │   ├── pyCrumbs/                      : "Bits and bytes of Python from the Internet" - @kirang89
 │   └── tensorflowExamples/            : "TensorFlow Tutorial and Examples for Beginners with Latest APIs" - @aymericdamien 
 │
