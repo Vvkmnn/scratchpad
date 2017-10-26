@@ -1,0 +1,185 @@
+\documentclass[letterpaper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{ESIEEcv}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage[hidelinks,pdfnewwindow=true]{hyperref}
+\usepackage{tikz}
+\usepackage{tabularx}
+
+
+\oddsidemargin -0.25in
+\textwidth\paperwidth
+\advance \textwidth by -1.25in
+\topmargin 0in
+\textheight\paperheight
+\advance\textheight -2in
+\headheight 0pt
+\headsep -2pt
+\footskip 0pt
+
+
+\title{today}
+
+%\renewcommand{\PostApport}{. } %TBunches the bullet points together%
+\renewcommand{\FonteApport}{\upshape}
+
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=north east, inner sep=45pt]  at (current page.north east)
+     {\href{http://www.vkmn.xyz}{\includegraphics[height=2.7cm]{InvertLogoCircle.png}}};
+\end{tikzpicture}
+
+
+\begin{tikzpicture}[remember picture, overlay]
+  \node [anchor=south east, inner sep=45pt]  at (current page.south east)
+     {\today};
+\end{tikzpicture}
+
+
+%Header
+\vspace{-13mm}
+
+\textbf{\Huge \Huge \href{http://www.vkmn.xyz}{Vivek Menon}}
+
+\smallskip
+\href{mailto:mail@vkmn.xyz}{mail@vkmn.xyz} \hspace{3.1cm} 416-846-0630
+\newline \href{https://ca.linkedin.com/in/vvkmnn}{linkedin.vkmn.xyz} \hspace{3.2cm} \href{http://www.vkmn.xyz}{vkmn.xyz}
+
+101 Peter Street,
+Toronto, ON \hspace{1.3cm} M5V 1R4
+
+
+\begin{rubrique}{Summary}
+\end{rubrique}
+\noindent
+\hspace{-0.1cm}
+Proficient data scientist driven by finding insights through pattern discovery. Skilled at solving problems by analyzing cross-platform data using statistical techniques, visualizing discoveries to present actionable trends, \& developing cohesive data-driven strategies. Experienced with multiple verticals, including Automotive (Honda, Acura), QSR (KFC, Pizza Hut, Taco Bell), Pharmaceuticals (Advil, Viagra, Allergan, Juvederm, Botox), Finance (CaVirtex, TD, CIBC), Software (iStock) CPG (Treasury Wine States, Campbells, Campari), Retail (Adidas), \& Non-profits (UNICEF, DFC). Excels at simplifying insights, developing unique approaches, adapting under pressure, and learning new technologies.
+
+\vspace{-7mm}
+
+\begin{rubrique}{}
+\begin{sousrubrique}
+\Competence{}
+\Descr{
+
+
+\begin{small}
+
+\begin{tabularx}{\linewidth}{ XXX }
+  \textbf{Technical Skills} & \textbf{Specialized Skills} & \textbf{General Skills} \\
+
+%  MS Office (\textit{Word, Powerpoint, Excel, Access, Visio}) \newline
+R \linebreak Tableau  \linebreak Excel \linebreak Python \linebreak Matlab
+& Statistical Modeling \newline Data Visualization \newline Regression Analysis \newline KPI Frameworks  \newline Dashboard Creation
+& Report Generation  \newline Technology Adoption \newline Public Speaking \newline Presentations \newline Research \\
+\end{tabularx}
+
+\end{small}
+
+%%Finance
+%Financial Modelling,
+%Investment Theory,
+%Risk Management,
+%Mathematical Economics,
+%%Data
+%Python
+%R
+%Matlab
+%SQL
+%Linux/UNIX
+%Regression Analysis,
+%Monte Carlo Simulaions,
+%Pivot Tables,
+%%Marketing
+%Market Research,
+%Marketing Applications,
+%%General
+%Technical Aptitude,
+%Quantitative Decision Making,
+%Presentations,
+%Report Creation,
+%Time Management,
+}
+\end{sousrubrique}
+
+%\begin{sousrubrique}
+%\Competence{Pursuits}
+%\Descr{
+%Asset Trading, Consumer Behavior, Renewable Technologies, Entrepreneurship.}
+%\end{sousrubrique}
+
+%\begin{sousrubrique}
+%\Competence{\textbf{Works}}
+%\Descr{
+%\href{https://www.dropbox.com/s/9s743difq3u629h/TaaSFinalNeutral.pdf}{\textit{"Ties as a Service: A SaaS Simulation"(2014)}},  \href{https://www.dropbox.com/s/setmtni8qakjlwl/Final1_2.pdf}{\textit{"Fractal Behavior in Bitcoin Pricing" (2013)}}}
+%\end{sousrubrique}
+
+
+%\begin{sousrubrique}
+%\Competence{\textbf{Languages}}
+%\Descr{
+%English (\textit{Fluent}), \href{http://en.wikipedia.org/wiki/Malayalam}{Malayalam}, French (\textit{Basic}), Hindi (\textit{Basic}).}
+%\end{sousrubrique}
+
+\end{rubrique}
+
+\vspace{-7mm}
+
+
+\begin{rubrique}{Experience}
+\begin{sousrubrique}
+\Titre{Strategist, Data Scientist}
+\Lieu{Mirum}
+\Date{2015 - Present}
+\Duree{\textit{\small Toronto}}
+\Descr{Developed data-based strategies, deployed analytical technologies at scale, and led teams.}
+\Apport{Built and deployed an end-to-end analysis architecture for the \href{https://www.adidasavenuea.com/}{Adidas Avenue A} product by building an analytics back-end merging web metrics and retail data sets, designing executive dashboards, and developing testing protocols with ongoing optimization}
+\Apport{Created a custom data blending approach incorporating data from Social APIs and image hashes to track cross-platform social content performance for multiple brands}
+\Apport{Worked with JWT New York to develop measurement frameworks and the data-driven content strategies currently used by the \href{https://www.tweglobal.com}{TWE brands}, \href{http://www.gettyimages.ca}{Getty Images}, \href{http://www.advil.ca}{Advil}, and \href{http://www.unicef.ca}{UNICEF}}
+\end{sousrubrique}
+\begin{sousrubrique}
+\Titre{Digital Analyst}
+\Date{2014 - 2015}
+\Lieu{Grip Ltd}
+\Duree{\textit{\small Toronto}}
+\Descr{Discovered, presented and implemented data-centric insights directly for key stakeholders.}
+\Apport{Created an \href{http://1drv.ms/1NiFJx1}{automated KPI target generation model} that tested and rendered a \href{http://honda.ca}{family of regression models bi-weekly for Honda and Acura Canada}}
+\Apport{Developed \href{https://drive.google.com/file/d/0BzjxEwJg3JogaEZ5cU9HUjNaWDA/view}{a technique using large-scale suffix/prefix analysis in Google search query behavior} for Botox brand prototyping}
+\Apport{Constructed the KPI Measurement Framework currently used by the Yum Group (KFC, Taco Bell, Pizza Hut) \& McCain Canada}
+\Apport{Researched and developed an \href{https://drive.google.com/file/d/0BzjxEwJg3JogZ3RPZUYzZ2Y3eE0/view}{SEO Reference Guide} for use internal site audits, which helped inform a complete redesign of \href{http://honda.ca}{Honda Canada's website}}
+\end{sousrubrique}
+\begin{sousrubrique}
+\Titre{Exchange Broker}
+\Date{2013 - 2014}
+\Lieu{CaVirtex}
+\Duree{\textit{\small Vancouver}}
+\Descr{Researched, mined, and traded \href{https://bitcoin.org/}{Bitcoin} and other cryptocurrencies.}
+\Apport{Made over 100 trades on \href{https://www.cavirtex.com/home}{CaVirtex} exchange, trading on XBT/CAD fluctuations}
+\Apport{\href{http://1drv.ms/1Cu5HY6}{Wrote a research report} examining cryptocurrencies for fractal properties like over-dispersion, long memory and self-similarity, with assistance from the \href{http://charlesmartineau.com/}{UBC Finance Department}}
+\end{sousrubrique}
+\end{rubrique}
+\vspace{-7mm}
+
+\begin{rubrique}{Education}
+\vspace{-1mm}
+\begin{sousrubrique}
+\Titre{\small \newline \href{hhttp://www.sauder.ubc.ca/}{Sauder School of Business} -\href{http://www.ubc.ca/}{ University of British Columbia}}
+\Lieu{\href{http://www.sauder.ubc.ca/}{Bachelor of Commerce} in \href{http://www.sauder.ubc.ca/Programs/Bachelor_of_Commerce/Current_Students/Options/Finance}{Finance}, \href{http://www.sauder.ubc.ca/Programs/Bachelor_of_Commerce/Current_Students/Options/Marketing}{Marketing}, \& \href{http://www.economics.ubc.ca/}{Minor in Economics}}
+\Date{2010 - 2014}
+\Duree{\textit{Vancouver}}
+\Descr{Graduated in May 2014 with a double specialization and a minor, with an emphasis on financial engineering, market research, and economic analysis.}
+\Apport{\href{hhttps://www.dropbox.com/s/8zlpjr28z22p5i9/TaaSFinalBest.pdf?dl=0}{\textit{"Ties as a Service:A SaaS Simulation" (2014)}}: SaaS/MRR simulation with the Monte Carlo method}
+\Apport{\href{http://vkmn.xyz/blog/2013/12/22/bitcoin-fractal}{\textit{"Fractal Behavior in Bitcoin Pricing" (2013)}}: Bitcoin Investigation using multifractal financial analysis}
+\end{sousrubrique}
+\end{rubrique}
+
+\vspace{-5.5mm}
+
+
+
+\end{document}
