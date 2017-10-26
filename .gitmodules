@@ -25,12 +25,15 @@
 [submodule "python/kerasDeepLearning"]
 	path = python/kerasDeepLearning
 	url = https://github.com/leriomaggio/deep-learning-keras-tensorflow
+
 [submodule "python/tensorFlowTutorials"]
 	path = python/tensorFlowTutorials
 	url = https://github.com/Hvass-Labs/TensorFlow-Tutorials
+	
 [submodule "python/tensorFlowExamples"]
 	path = python/tensorFlowExamples
 	url = https://github.com/aymericdamien/TensorFlow-Examples
+	
 [submodule "julia/JuliaByExample"]
 	path = julia/JuliaByExample
 	url = https://github.com/samuelcolvin/JuliaByExample
