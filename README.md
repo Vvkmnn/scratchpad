@@ -1,26 +1,65 @@
-misc
+scratchpad
 ======
 
-Just some code/recipes I've randomly built or found.
+Code I'm tinkering with, typically borrowed from kind strangers.
 
-I also like to toss in interesting repos/code for later exploration.
 
-## Todo
-
-- [ ] [Look at more of the free books in here](https://github.com/vhf/free-programming-books/blob/master/free-programming-books.md#julia)
-- [x] [Play with my git board](https://github.com/mohebifar/grafgiti)
-- [x] [Use more selfhosted software](https://github.com/Kickball/awesome-selfhosted)
-- [x] [Download some more macOS apps](https://github.com/iCHAIT/awesome-macOS) (and [m-cli](https://github.com/rgcr/m-cli))
-- [ ] Get better at [Git](https://leanpub.com/progitreedited) and [understand](http://marklodato.github.io/visual-git-guide/index-en.html) how it [works](https://jwiegley.github.io/git-from-the-bottom-up/), maybe play with [some tools](https://github.com/jlord/git-it-electron)?
-- [ ] Apply [Julia to Quantitative Economics](http://quant-econ.net/jl/learning_julia.html) and other [problems](http://github.com)
-- [ ] [Download Input and see how it works on Atom](https://gist.github.com/eins78/a8dde1eb0d10963a65e7)
-- [ ] Go through this [cool Tensorflow tutorial](https://github.com/alrojo/tensorflow-tutorial)
-- [ ] Adapt backpropNeat to Python
-- [ ] Read @thejameskyle's amazing guides on compilers and data structures
-- [ ] Translate more of my [Leanpub](https://leanpub.com) library into code
-- [ ] Explore more [awesome](https://github.com/sindresorhus/awesome) [lists](https://github.com/jnv/lists)
-- [ ] Check out these [funny Markov Chains](https://github.com/sublimino/awesome-funny-markov)
-- [ ] Work through the code for @dennybritz's [Retrieval Based Chatbot Model using LTSMs and Tensorflow](https://github.com/dennybritz/chatbot-retrieval/)
-## License
-
-Licensed under [Creative Commons](https://creativecommons.org/licenses/).
+```
+bash/
+├── bash/                   
+│   ├── bash-guide/                    : A quick guide to the Bash Shell.
+│   └── bash-commands/                 : Some of the most popular Bash commands!
+│
+├── clojure/
+│   └── clojure-code-demo/             : A demo for Vscode & Clojure integration
+│
+├── excel/                             
+│   └── functions/                     : Some Excel functions I like 
+│
+├── f#/                                
+│   └── functional-practice/           : Practice with Monads & F#
+│
+├── git/
+│   └── ohshitgit/                     : Oh shit git!
+│
+├── javascript/
+│   ├── backpropNEAT/                  : An amazing simulation of Backprop Neuroevolution from @hardmaru
+│   ├── GoogleTagManager/              : A couple things I wrote for Google Tag Manager to track Custom Event behavior in Google Analytics
+│   ├── ItsyBitsyDataStructures/       : "Super simplified examples of many of the common data structures written in easy to read JavaScript" - @thejameskyle
+│   └── TheSuperTinyCompiler/          : "Ultra-simplified example of all the major pieces of a modern compiler written in easy to read JavaScript" - @thejameskyle
+│
+├── julia/
+│   └── helloJulia/                    : Hello Julia!
+│
+├── latex/
+│   ├── cv/                            : I like to write my resume in (French?) LaTeX.
+│   └── TiesAsAServices                : A pet project I wrote to learn more R and get into Hootsuite. I didn't get into Hootsuite.
+│
+├── markdown/
+├── matlab/
+│   ├── bitcoinFractals/               : The code behind my 2013 paper on "Multifractal Behavior in Bitcoin Pricing"; some of my first/shittiest code ever! 
+│   └── neuralNetworks/                : The code behind my 2014 Medium post on neural networks, and my first interactions with their architecture.
+│
+├── python/
+│   ├── 12StepstoScientificPythonCode/ : Some useful tips on writing clean Python code. Currently on step 1, lol.
+│   ├── algorithms/                    : An excellent collection of Pythonic Data Structures and Algorithms from @keon
+│   ├── Bayes/                         : Playing around with some Bayesian stats.
+│   ├── codeWars/                      : Stuff from my Codewars practice!
+│   ├── hackerRank/                    : Stuff from my Hackerrank practice!
+│   ├── intermediatePython/            : Notes from someone who is better at Python than me.
+│   ├── kaggle/                        : Kaggle notebooks. 
+│   ├── kerasDeepLearning/             : A robust intro to Deep Learning via Keras from @leriomaggio
+│   ├── pyCrumbs/                      : "Bits and bytes of Python from the Internet" - @kirang89
+│   └── tensorflowExamples/            : "TensorFlow Tutorial and Examples for Beginners with Latest APIs" - @aymericdamien 
+│
+├── r/
+│   ├── Bayes/                         : Hello Bayes my old friend. 
+│   ├── gTrendScraper/                 : Querying Google Trends from R.
+│   ├── irisMachineLearning/           : Everyone's favorite dataset, explored via Machine Learning!
+│   ├── socialScraper/                 : A variety of helpful scripts I wrote for use at my Advertising job, focused on scraping social networks.
+│   ├── swirlPractice/                 : swirl is easily the coolest intro to R I've ever found. 
+│   └── TiesAsAService/                : The code behind my pet project for Hootsuite, focused on MRR modeling and simulation via Monte Carlo.
+│
+├── tableau/
+│   └── functions/                     : Stuff from Tableau I felt like keeping.
+```

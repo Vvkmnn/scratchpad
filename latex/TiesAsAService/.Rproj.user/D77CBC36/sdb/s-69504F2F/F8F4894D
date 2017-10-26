@@ -1,0 +1,17 @@
+{
+    "contents" : "# ggplot2 examples\nlibrary(ggplot2) \n\n# create factors with value labels \nmtcars$gear <- factor(mtcars$gear,levels=c(3,4,5),\n                      labels=c(\"3gears\",\"4gears\",\"5gears\")) \nmtcars$am <- factor(mtcars$am,levels=c(0,1),\n                    labels=c(\"Automatic\",\"Manual\")) \nmtcars$cyl <- factor(mtcars$cyl,levels=c(4,6,8),\n                     labels=c(\"4cyl\",\"6cyl\",\"8cyl\")) \n\n# Kernel density plots for mpg\n# grouped by number of gears (indicated by color)\nqplot(mpg, data=mtcars, geom=\"area\", fill=gear, alpha=I(.5), \n      main=\"Distribution of Gas Milage\", xlab=\"Miles Per Gallon\", \n      ylab=\"Density\")\n\n# Scatterplot of mpg vs. hp for each combination of gears and cylinders\n# in each facet, transmittion type is represented by shape and color\nqplot(hp, mpg, data=mtcars, shape=am, color=am, \n      facets=gear~cyl, size=I(3),\n      xlab=\"Horsepower\", ylab=\"Miles per Gallon\") \n\nrand\n\n# Separate regressions of mpg on weight for each number of cylinders\nqplot(wt, mpg, data=mtcars, geom=c(\"point\", \"smooth\"), \n      method=\"lm\", formula=y~x, color=cyl, \n      main=\"Regression of MPG on Weight\", \n      xlab=\"Weight\", ylab=\"Miles per Gallon\")\n\n# Boxplots of mpg by number of gears \n# observations (points) are overlayed and jittered\nqplot(gear, mpg, data=mtcars, geom=c(\"boxplot\", \"jitter\"), \n      fill=gear, main=\"Mileage by Gear Number\",\n      xlab=\"\", ylab=\"Miles per Gallon\")\n",
+    "created" : 1400979443121.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1016487438",
+    "id" : "F8F4894D",
+    "lastKnownWriteTime" : 21392300099829876,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

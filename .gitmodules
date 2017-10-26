@@ -1,3 +1,15 @@
+[submodule "javascript/TheSuperTinyCompiler"]
+	path = javascript/TheSuperTinyCompiler
+	url = https://github.com/thejameskyle/the-super-tiny-compiler
+
+[submodule "javascript/ItsyBitsyDataStructures"]
+	path = javascript/ItsyBitsyDataStructures
+	url = https://github.com/thejameskyle/itsy-bitsy-data-structures
+
+[submodule "javascript/backpropNEAT"]
+	path = javascript/backpropNEAT
+	url = https://github.com/hardmaru/backprop-neat-js
+
 [submodule "javascript/backpropNEAT"]
 	path = javascript/backpropNEAT
 	url = https://github.com/hardmaru/backprop-neat-js
@@ -5,3 +17,17 @@
 [submodule "python/algorithms"]
 	path = python/algorithms
 	url = https://github.com/keon/algorithms
+
+[submodule "python/pyCrumbs"]
+	path = python/pyCrumbs
+	url = https://github.com/kirang89/pycrumbs
+
+[submodule "python/kerasDeepLearning"]
+	path = python/kerasDeepLearning
+	url = https://github.com/leriomaggio/deep-learning-keras-tensorflow
+[submodule "python/tensorFlowTutorials"]
+	path = python/tensorFlowTutorials
+	url = https://github.com/Hvass-Labs/TensorFlow-Tutorials
+[submodule "python/tensorFlowExamples"]
+	path = python/tensorFlowExamples
+	url = https://github.com/aymericdamien/TensorFlow-Examples
