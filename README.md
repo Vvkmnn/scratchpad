@@ -61,6 +61,6 @@ scratchpad/
 │   ├── swirlPractice/                 : swirl is easily the coolest intro to R I've ever found. 
 │   └── TiesAsAService/                : The code behind my pet project for Hootsuite, focused on MRR modeling and simulation via Monte Carlo.
 │
-├── tableau/
+└── tableau/
     └── functions/                     : Stuff from Tableau I felt like keeping.
 ```
