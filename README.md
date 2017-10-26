@@ -36,6 +36,7 @@ bash/
 │   └── TiesAsAServices                : A pet project I wrote to learn more R and get into Hootsuite. I didn't get into Hootsuite.
 │
 ├── markdown/
+│
 ├── matlab/
 │   ├── bitcoinFractals/               : The code behind my 2013 paper on "Multifractal Behavior in Bitcoin Pricing"; some of my first/shittiest code ever! 
 │   └── neuralNetworks/                : The code behind my 2014 Medium post on neural networks, and my first interactions with their architecture.
