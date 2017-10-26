@@ -1,4 +1,4 @@
 private/
 bin/
 **/bin
-icloud
+.icloud
