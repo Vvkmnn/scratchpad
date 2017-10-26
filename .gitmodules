@@ -1,3 +1,7 @@
+[submodule "javascript/backpropNEAT"]
+	path = javascript/backpropNEAT
+	url = https://github.com/hardmaru/backprop-neat-js
+
 [submodule "python/algorithms"]
 	path = python/algorithms
 	url = https://github.com/keon/algorithms
