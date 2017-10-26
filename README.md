@@ -6,6 +6,7 @@ Code I'm tinkering with, typically borrowed from kind strangers.
 
 ```
 scratchpad/
+│
 ├── bash/                   
 │   ├── bash-guide/                    : A quick guide to the Bash Shell.
 │   └── bash-commands/                 : Some of the most popular Bash commands!
@@ -61,5 +62,5 @@ scratchpad/
 │   └── TiesAsAService/                : The code behind my pet project for Hootsuite, focused on MRR modeling and simulation via Monte Carlo.
 │
 ├── tableau/
-│   └── functions/                     : Stuff from Tableau I felt like keeping.
+    └── functions/                     : Stuff from Tableau I felt like keeping.
 ```
