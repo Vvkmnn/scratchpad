@@ -1,0 +1,2 @@
+:"find substring y in string x"
+findstr::{[s u];:[(#s::x)<#u::y;[];({(#u)#x}'{x:+s}'-!1+(#s)-#u)?u]}

@@ -1,0 +1,2 @@
+:"depth of a list"
+dp::{:[@x;0;1+|/.f'x]}

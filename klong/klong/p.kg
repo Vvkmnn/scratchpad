@@ -1,0 +1,3 @@
+:"display members of a list"
+d::{.d({($x)," ",$y}/x)}
+p::{d(x);.p("")}

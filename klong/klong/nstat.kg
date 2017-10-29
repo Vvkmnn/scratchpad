@@ -1,0 +1,283 @@
+:"statistics functions (new package)"
+
+.comment("*****")
+
+A "data set" in this context is a list of data points [x1, ... xN].
+An "x/y set" is a list of x/y pairs [[x1 y1] ... [xN yN]].
+
+kp(k;n) k-permutations of set of size n
+kc(k;n) k-combinations of set of size n
+
+rcp(A;B|A;B'|A') reverse conditional probability P(A|B) (Bayes' rule)
+
+mu(d)     mean of data set d = [x1, ...]
+Q(x;d)    x'th quantile of data set; 0<=x<=1
+M(d)      median of data set
+mod(d)    mode of data set
+rng(d)    range of data set
+var(d)    variance of data set
+cov(d;d2) covariance of data sets
+cor(d;d2) correlation coefficient of data sets
+sd(d)     standard deviation of data set (population sd)
+svar(d)   sample variance of data set
+ssd(d)    standard deviation of data set (sample sd)
+
+lreg(s)   linear regression coefficients for x/y set s, gives a,b in ax+b
+lr(x;l)   interpolate "y" at "x" using l=a,b of lreg
+hist(k;d) k-histogram of data set d (list of means of k-quantiles)
+seg(k;d)  divide data set d into k segments, returning k+1 endpoints
+rss(s;f)  compute RSS for x/y set s and regression function f
+rse(s;f)  compute RSE (res. sq. error) for x/y set x and reg. fn. f
+tss(s)    compute total sum of squares (TSS) of set s
+r2(s;f)   compute R^2 statistic for given x/y set and regression function
+mse(d;e)  compute mean squared error (MSE) for data set d and estimates e
+
+spl(k;s)  compute spline with k degrees of freedom through x/y set s
+
+cvset(s)   create cross validation set from x/y set
+cve(f;p;s) cross validation error of set s, fitting fn f, and prediction fn p
+
+freq(D;n;[x0 xn])  create relative n-point frequency distribution X~D
+                   in [x0,xn]; D is a PDF
+nfreq(D;n;[x0 xn]) create normalized n-point frequency distribution X~D
+                   in [x0,xn]; D is a PDF
+dist(D;n;[x0 xn])  create n D-distributed data points in [x0,xn]; D is a PDF:
+                   note: "dist" creates absolute frequencies; &dist creates
+                   the actual distribution
+
+errdist(x)  Create a set of normally distributed error values in the range
+            [-0.5..0.5]; x is the number of distinct error values; try x=10
+err(x;y;z)  Add a normally distributed error to data set z; x is the number
+            of distinct error values, y the size of the error (1=[-0.5..0.5])
+
+ct.xsum(x) marginal sums of X categories of contingency table (CT)
+ct.ysum(x) marginal sums of Y categories of CT
+ct.sum(x)  grand total of CT
+ct.exp     expectations of CT
+ct.x2      chi-square score of CT
+
+erf(x)    Gauss error function
+
+f.pmf(x;f) PMF of freq. distr. X ~ f = [[x1 freq1] ...]
+f.cdf(x;f) CDF of freq. distr. f
+f.mu(f)    mean of freq. distr. f
+f.var(f)   variance of freq. distr. f
+
+u.pmf(x;a;b) PMF of uniform distribution X ~ U(a,b)
+u.cdf(x;a;b) CDF of uniform distribution
+u.mu(a;b)    mean of uniform distribution
+u.var(a;b)   variance of uniform distribution
+u.skew(a;b)  skewness of uniform distribution
+
+geo.pmf(x;p) PMF of geometric distribution X ~ Geo(p)
+geo.cdf(x;p) CDF of geometric distribution
+geo.mu(p)    mean of geometric distribution
+geo.var(p)   variance of geometric distribution
+geo.skew(p)  skewness of geometric distribution
+
+b.pmf(x;n;p) PMF of binomial distribution X ~ B(n,p)
+b.cdf(x;n;p) CDF of binomial distribution
+b.mu(n;p)    mean of binomial distribution
+b.var(n;p)   variance of binomial distribution
+b.skew(n;p)  skewness of binomial distribution
+
+hyp.pmf(x;n,p,N) PMF of hypergeometric distribution X ~ Hyp(p)
+hyp.cdf(x;n,p,N) CDF of hypergeometric distribution
+hyp.mu(n;p;N)    mean of hypergeometric distribution
+hyp.var(n;p;N)   variance of hypergeometric distribution
+hyp.skew(n;p;N)  skewness of hypergeometric distribution
+
+poi.pmf(x;lambda) PMF of poisson distribution X ~ Poi(lambda)
+poi.cdf(x;lambda) CDF of poisson distribution
+poi.mu(lambda)    mean of poisson distribution
+poi.var(lambda)   variance of poisson distribution
+poi.skew(lambda) skewness of poisson distribution
+
+zscore(x;mu;s2) z-score of x given mean mu and variance s2
+ndf(x)          PDF of standard normal distribution X ~ N(0,1)
+phi(x)          CDF of standard normal distribution
+cdf(x)          phi(x)
+qf(x)           QF (CDF^-1) of standard normal distribution
+
+n.pdf(x;mu;sigma^2) PDF of normal distribution X ~ N(mu,sigma^2)
+n.cdf(x;mu;sigma^2) CDF of normal distribution
+n.mu(mu;sigma^2)    mean of normal distribution
+n.var(mu;sigma^2)   variance of normal distribution
+n.skew(mu;sigma^2)  skewness of normal distribution
+n.qf(x;mu;sigma^2)  QF of normal distribution
+
+ln.pdf(x;mu;sigma^2) PDF of lognormal distribution X ~ ln N(mu,sigma^2)
+ln.cdf(x;mu;sigma^2) CDF of lognormal distribution
+ln.mu(mu;sigma^2)    mean of lognormal distribution
+ln.var(mu;sigma^2)   variance of lognormal distribution
+ln.skew(mu;sigma^2)  skewness of lognormal distribution
+ln.qf(x;mu;sigma^2)  QF of lognormal distribution
+
+X2(E;O)      compute X^2 statistic; E=expected, O=observed
+x2.pdf(nu;x) PDF of chi-square distribution X ~ chi^2(nu)
+x2.cdf(nu;x) CDF of chi-square distribution
+x2.mu(nu)    mean of chi-square distribution
+x2.var(nu)   variance of chi-square distribution
+x2.skew(nu)  skewness of chi-square distribution
+ct.X2(x)     compute X^2 statistic from contingency table
+x2.qf(nu;x)  QF of chi-square dist; SLOW
+
+tscore(x;s2;n) t-score of x given variance s2 and # of observations n
+t.pdf(nu;x)    PDF of Student's t-distribution T ~ t(nu)
+t.cdf(nu;x)    CDF of t-distribution
+t.mu(nu)       mean of t-distribution
+t.var(nu)      variance of t-distribution
+t.skew(nu)     skewness of t-distribution
+t.qf(nu;x)     QF of t-dist; SLOW
+
+Error function approximation by Abramowitz/Stegun, max error = 1.5×10-7.
+T distribution approximation by Zogheib/Elsaheli, max error = 0.0029
+*****
+
+.l("spline.kg")
+.l("math.kg")
+.l("regf.kg")
+.l("bisect.kg")
+
+.module(:stat)
+
+kp::{*/(y-x)+1+!x}
+kc::{:[0~x;1;_kp(x;y)%*/1+!x]}
+
+rcp::{(x*y)%(x*y)+(1-x)*1-z}
+
+mu::{(+/x)%#x}
+S::{:[y<0;0:|~y<#x;*|x;x@y]}
+Q::{[s i];s::y@<y;:[i=_i::x*#y;mu(S(s;_i),S(s;_i-1));S(s;_i)]}
+M::{Q(0.5;x)}
+qrt::{Q(0.25;x),Q(0.5;x),Q(0.75;x)}
+mod::{[q];*'q@(#'q)?|/#'q::1_(*'=x):_x}
+rng::{[s];(*|s)-*s::x@<x}
+cov::{((+/x*y)%#x)-mu(x)*mu(y)}
+var::{cov(x;x)}
+var::{((+/x*x)%#x)-mu(x)^2}
+cor::{cov(x;y)%var(x)}
+sd::{sqr(var(x))}
+svar::{((+/{x*x}'x)%(#x)-1)-mu(x)^2}
+ssd::{sqr(svar(x))}
+
+lreg::{[a];a::cov(x;y)%var(x);a,mu(y)-a*mu(x)}
+lreg::{[a xx yy mx my];xx::*'x;yy::{x@1}'x;mx::mu(xx);my::mu(yy);
+       a::+/((xx-mx)*'yy-my)%+/{x^2}'(xx-mx);a,my-a*mx}
+lr::{(x**y)+y@1}
+
+hist::{[s];s::,/{10:^x}'y;mu'(-_-(#s)%x):#s}
+seg::{(&/y)+(rng(y)%x)*0,1+!x}
+
+rss::{[f];f::y;+/(*'x){(y-f(x))^2}'{x@1}'x}
+rse::{sqr(rss(x;y)%(#x)-2)}
+tss::{[mx s];s::{x@1}'x;mx::mu(s);+/{(x-mx)^2}'s}
+r2::{1-rss(x;y)%tss(x)}
+mse::{(+/x{(x-y)^2}'y)%#x}
+
+hg::{[h];+(,seg((#h)-1;*'y)),,h::hist(x;{x@1}'y)}
+spl::{[s n];s::spline(hg(x;y));s:-(y:@((#y)-1),0),((#s)-1),0}
+
+cvset::{[s];s::x;{(x@1),,(*x),x@2}'{(x,x+1):_s}'!#x}
+cve::{[f p];f::x;p::y;(%#z)*+/{(((*x)@1)-p(**x;f(x@1)))^2}'cvset(z)}
+
+freq::{[d c D x0 xn n];D::x;n::y;x0::*z;xn::z@1;D'x0+(!n)%(n-1)%xn-x0}
+nfreq::{[c d];c::%|/d::freq(x;y;z);{c*x}'d}
+dist::{[n];n::y;rnd'{n*x}'nfreq(x;n;(*z),z@1)}
+
+errdist::{[s];s::(-|s),s::&dist(ndf;x;[0 3]);{-x*0.5%*s}'s}
+err::{[d n e];d::errdist(x);n::#d;e::y;{x+e*d@_n*.rn()}'z}
+
+cp::{[f b];f::x;b::z;,/{[a];a::x;,{f(a;x)}'b}'y}
+ct.xsum::{+/x}
+ct.ysum::{+/'x}
+ct.sum::{+/+/x}
+ct.exp::{[tx ty tt];ty::+/'x;tx::+/x;tt::+/tx;cp({(x*y%tt)};ty;tx)}
+ct.x2::{+/,/x{((x-y)^2)%x}'ct.exp(x)}
+
+efc::[0.0705230784 0.0422820123 0.0092705272
+      0.0001520143 0.0002765672 0.0000430638]
+erf::{:[x<0;-erf(-x);1-%(1+/efc**\6:^x)^16]}
+
+f.pmf::{[p];p::(*'y)?x;:[[]~p;0;((y@*p)@1)%+/{x@1}'y]}
+f.cdf::{[f m];f::y;m::&/*'y;+/{f.pmf(x;f)}'m+!1+x-m}
+f.mu::{(+/{{x*y}@x}'x)%+/{x@1}'x}
+f.var::{((+/({{y*x^2}@x}'x))%+/{x@1}'x)-f.mu(x)^2}
+
+u.pmf::{:[x<y;0:|x>z;0;%1+z-y]}
+u.cdf::{:[x<y;0:|x>z;1;(1+(_x)-y)%1+z-y]}
+u.mu::{(x+y)%2}
+u.var::{%12*((y-x+1)^2)-1}
+u.skew::{x;y;0}
+
+geo.pmf::{y*(1-y)^_(x-1)}
+geo.cdf::{1-(1-y)^_x}
+geo.mu::{%x}
+geo.var::{(1-x)%x^2}
+geo.skew::{(2-x)%(1-x)^0.5}
+
+b.pmf::{kc(_x;y)*(z^_x)*(1-z)^y-_x}
+b.cdf::{[n p];n::y;p::z;+/{b.pmf(x;n;p)}':[0~_x;0;!_1+x]}
+b.mu::{x*y}
+b.var::{x*y*1-y}
+b.skew::{((1-y)-y)%(x*y*1-y)^0.5}
+
+hyp.pmf::{[K n p N];n::y@0;p::y@1;N::y@2;K::rnd(N*p);
+          :[x<0|n+K-N;0:|x>K&n;0;(kc(_x;K)*kc(n-_x;N-K))%kc(n;N)]}
+hyp.cdf::{[n p N];n::y@0;p::y@1;N::y@2;+/{hyp.pmf(x;n,p,N)}':[0~_x;0;!_x]}
+hyp.mu::{x*y}
+hyp.var::{((x*y*y-1)*z-x)%z-1}
+
+poi.pmf::{((y^_x)*e^-y)%:[0~_x;1;*/1+!_x]}
+poi.cdf::{[lam];lam::y;+/{poi.pmf(x;lam)}':[0~_x;0;!_x]}
+poi.mu::{x}
+poi.var::{x}
+poi.skew::{%x^0.5}
+
+sqr2pi::(2*pi)^0.5
+sqr2::2^0.5
+
+zscore::{(x-y)%sqr(z)}
+ndf::{(%sqr2pi)*exp(-(x^2)%2)}
+phi::{0.5+0.5*erf(x%sqr2)}
+cdf::phi
+qf::{[p];p::x;regf({phi(x)-p};0;1)}
+
+n.pdf::{[s];s::sqr(z);(%s*sqr2pi)*exp(-((x-y)^2)%2*s^2)}
+n.cdf::{phi((x-y)%sqr(z))}
+n.mu::{y;x}
+n.var::{x;y}
+n.skew::{x;y;0}
+n.qf::{y+qf(x)*sqr(z)}
+
+ln.pdf::{:[0=x;0;(%x*sqr(z)*sqr2pi)*exp(-((ln(x)-y)^2)%2*z)]}
+ln.cdf::{:[0=x;0;0.5+0.5*erf((ln(x)-y)%sqr2*sqr(z))]}
+ln.qf::{[m s p];p::x;m::y;s::z;bisect({ln.cdf(x;m;s)-p})}
+ln.mu::{exp(x+y%2)}
+ln.var::{(exp(y)-1)*exp(y+2*x)}
+ln.skew::{x;(2+exp(y))*sqr(exp(y)-1)}
+
+X2::{+/x{((y-x)^2)%x}'y}
+x2.pdf::{:[0~y;0;(%((2^x%2)*gam(x%2)))*(y^(x%2)-1)*e^-y%2]}
+x2.cdf::{gamp(x%2;y%2)}
+x2.qf::{[nu p];nu::x;p::y;regf({x2.cdf(nu;x)-p};0;nu)}
+x2.qf::{[nu p];nu::x;p::y;bisect({x2.cdf(nu;x)-p})}
+x2.mu::{x}
+x2.var::{2*x}
+x2.skew::{(8%x)^0.5}
+
+ct.exp::{[r c t];r::{+/x}'x;c::{+/x}'+x;t::+/c;{[a];a::x;{(x*a)%t}'c}'r}
+ct.X2::{X2(,/ct.exp(x);,/x)}
+
+tscore::{sqr(x*(y%sqr(z-1)))}
+t.pdf::{(gam((x+1)%2)%(sqr(x*pi))*gam(x%2))*(1+(y^2)%x)^-(x+1)%2}
+t.cdf::{z1::y*(1-%4*x)*(1+(%2*x)*y^2)^-0.5;
+         %(1+e^((0.000345*z1^5)-(0.069647*z1^3))-1.604326*z1)}
+t.cdf::{:[y<0;1-.f(x;-y);1-0.5*rbeta(x%x+y^2;x%2;0.5)]}
+t.qf::{[nu p];nu::x;p::y;
+       :[p<0.5;-bisect({t.cdf(nu;x)-1-p});bisect({t.cdf(nu;x)-p})]}
+t.mu::{:[x>1;0;%0]}
+t.var::{:[x>2;x%x-2;%0]}
+t.skew::{x;0}
+
+.module(0)

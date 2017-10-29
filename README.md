@@ -28,6 +28,9 @@ scratchpad/
 │   ├── ItsyBitsyDataStructures/       : "All the things you didn't know you wanted to know about data structures" - @thejameskyle
 │   └── TheSuperTinyCompiler/          : "Possibly the smallest compiler ever" - @thejameskyle
 │
+├── klong/
+│   └── klong/                         : "An Array Language"  - @nmh
+│
 ├── julia/
 │   └── JuliaByExample/                : "Examples of Julia" - @samuelcolvin
 │

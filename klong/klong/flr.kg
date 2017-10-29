@@ -1,0 +1,3 @@
+:"filter; x = predicate, y = list"
+:"e.g. flr({0=x!7};!20) --> [0 7 14]"
+flr::{[f];f::x;y@(f'y)?1}

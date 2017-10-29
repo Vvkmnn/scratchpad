@@ -1,0 +1,116 @@
+:"Interactive visual plotter interface"
+:"Requires Ghostscript and Ghostview (optional, see code)"
+
+helptext::[
+"set.x(x;y;z)      set x-axis to x..y, step z"
+"set.y(x;y;z)      set y-axis to x..y, step z"
+"set.z(x;y;z)      set z-axis to x..y, step z"
+"set.zsp(x)        set z-spacing to n (print only every x'th z-mark)"
+"set.grid(x)       set grid density, 3=dense (default), 7=sparse, 0=off"
+"set.font(x)       set font size in points (default: 12, 3d=1.5 times)"
+"set.dot(x)        set dot size to x (default: 5)"
+"set.res(x)        set resolution (50..500, default 200)"
+"set.fill(x;y;z)   fill area from x to y, base line = z (usually 0)"
+"set.nofill()      delete fill area"
+"set.color(r;g;b)  set fill color to the given RGB values"
+"v.plot(f)         2D-plot monadic function, e.g. {x^2}"
+"v.plot3(f)        3D-plot dyadic function, e.g. {x*y}"
+"v.aplot(f;x1;xn)  plot function f with auto-scale from x0 to xn"
+"v.bar(x)          bar-plot set x with auto-scaling"
+"v.scatter(x)      scatter-plot set x with auto-scaling"
+"v.scatter2(x)     scatter-plot x/y set x with auto-scaling"
+"vp()              re-plot most recent function"
+]
+
+.l("nplot.kg")
+.module(:vplot)
+tmp::"vp",(2_$.rn()),".tmp"
+v2c::"gs -g800x750 -r96 -dBATCH -dNOSAFER -dTTYPAUSE ",tmp
+v3c::"gs -g900x800 -r72 -dBATCH -dNOSAFER -dTTYPAUSE ",tmp
+v2c::"gv -spartan -scale=0.7 -media=BBOX ",tmp
+v3c::"gv -spartan -scale=0.5 -media=BBOX ",tmp
+xsc::[-1 1 0.1]
+ysc::[-1 1 0.1]
+zsc::[-1 1 0.1]
+zsp::1
+grd::3
+dot::5
+fnt::12
+res::200
+fun::{x}
+dat::[]
+fil::[]
+plt::0
+set.x::{xsc::x,y,z}
+set.y::{ysc::x,y,z}
+set.z::{zsc::x,y,z}
+set.zsp::{zsp::x}
+set.grid::{grd::x}
+set.font::{fnt::x}
+set.dot::{dot::x}
+set.res::{res::x}
+set.fill::{fil::x,y,z}
+set.nofill::{fil::[]}
+set.color::{fillrgb(x;y;z)}
+v.aplot::{[c co];plt:::plot;.tc(c::.oc(tmp));
+          set.x(y;z;0.1*#y-z);
+          co::aplot(fun::x;y;z);
+          .cc(c);.sys(v2c);.df(tmp);
+          co::{rndn(x;*co)}'(-1)_1_co;
+          set.y@co,0.1*#(*co)-co@1}
+v.plot::{[c];plt:::plot;.tc(c::.oc(tmp));
+         settext(fnt);setres(res);setgrid(grd);
+         :[grd;grid(xsc;ysc);frame(xsc;ysc)];
+         plot'fun::x;
+         :[fil;area@fil;[]];
+         :[fil;vline(*fil);[]];
+         :[fil;vline(fil@1);[]];
+         :[fil;:[grd;grid(xsc;ysc);frame(xsc;ysc)];[]];
+         draw();
+         .cc(c);.sys(v2c);.df(tmp);[]}
+step::{:[~x>20;1
+       :|~x>50;2
+       :|~x>100;5
+       :|~x>200;10
+       :|~x>500;20
+       :|~x>1000;50
+       :|~x>2000;100
+       ;rnd(0.1*x)]}
+v.bar::{[c ff l h];plt:::bar;.tc(c::.oc(tmp));
+        settext(fnt);setgrid(grd);
+        s::step((h::1+_|/x)-l::_&/x);dat::x;ff:::[grd;cgrid;cframe];
+        ff($'1+!#x;0,(h+s),s);
+        barplot(x);
+        draw();
+        .cc(c);.sys(v2c);.df(tmp);[]}
+v.scatter::{[c ff s l h];plt:::scatter;.tc(c::.oc(tmp));
+            settext(fnt);setgrid(grd);setdot(dot);
+            dat::x;ff:::[grd;cgrid;cframe];s::step((h::1+_|/x)-l::_&/x);
+            ff($'1+!#x;(l-s),(h+s),s);
+            scplot(x);
+            draw();
+            .cc(c);.sys(v2c);.df(tmp);[]}
+v.scatter2::{[c ff sx sy lx hx ly hy];plt:::scatter2;.tc(c::.oc(tmp));
+             settext(fnt);setgrid(grd);setdot(dot);
+             dat::x;ff:::[grd;grid;frame];
+             sy::step((hy::1+_|/{x@1}'x)-ly::_&/{x@1}'x);
+             sx::step((hx::|/*'x)-lx::&/*'x);
+             ff((lx-sx),(hx+sx),sx;(ly-sy),(hy+sy),sy);
+             scplot2(x);
+             draw();
+             .cc(c);.sys(v2c);.df(tmp);[]}
+v.plot3::{[c];plt:::plot3;.tc(c::.oc(tmp));
+          settext(_1.5*fnt);setres(res);setgrid(grd);setzspace(zsp);
+          :[grd;grid3(xsc;ysc;zsc);frame3(xsc;ysc;zsc)];
+          plot3'fun::x;
+          draw();
+          .cc(c);.sys(v3c);.df(tmp);[]}
+vp::{:[plt~:bar;v.bar(dat)
+     :|plt~:scatter;v.scatter(dat)
+     :|plt~:scatter2;v.scatter2(dat)
+     :|plt~:plot;v.plot(fun)
+     :|plt~:plot3;v.plot3(fun)
+     ;[]]}
+vh::{.p'helptext;[]}
+.module(0)
+.p("vplot: type vh() for help")

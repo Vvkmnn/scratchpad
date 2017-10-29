@@ -1,0 +1,311 @@
+:"curve-plotting functions, outputting EPS"
+:"try kg -q -l stat -l nplot -r 'aplot(cdf;-4;4)' >cdf.eps"
+
+.comment("*****")
+frame(X;Y)        draw frame with coordinates X=[x1 xn sx] and Y=[y1 yn sy]
+                  where sx,sy = step width
+grid(X;Y)         like frame, but with a grid
+cframe(X;Y)       like frame, but X contains category names
+cgrid(X;Y)        like grid, but X contains category names
+frame3(X;Y;Z)     draw 3D frame with coordinates X=[x1 xn sx], Y=[y1 yn sy],
+                  and Z=[z1 zn sz], where sx,sy,sz = step width
+grid3(X;Y;Z)      like frame3, but with a grid
+cframe3(X;Y;Z)    like frame, but Z contains category names
+cgrid(X;Y;Z)      like grid, but Z contains category names
+plot(fn)          plot function in a given frame/grid
+plot3(fn)         plot dyadic function in 3D frame/grid
+area(x0;xn;b)     fill area x0..xn below a plotted curve;
+                  b = base line (mostly 0)
+vline(x)          plot the value of a fn as a vertical line at x
+barplot(data)     plot bar graph from data in frame/grid
+bar(x;y;n)        re-plot x'th bar of n-bar graph with height y
+scplot(data)      plot scatter graph from data in frame/grid
+scplot2(data)     scatter-plot pairs [x y]... in frame/grid
+errplot(x;fn)     plot error bars for pair in x given model fn
+errbar([x y];fn)  plot an error bar from x/y to x/fn(x)
+text(x;y;text)    insert text into diagram; x,y in 0..499
+ctext(x;y;text)   insert centered text
+rtext(x;y;text)   insert right-aligned text
+draw()            finish drawing; not required with aplot
+aplot(fn;x0;xn)   draw auto-scaled grid and plot function
+color()           use orange for filling areas (default)
+gray()            use gray for filling areas
+setfill(x)        set custom fill color (DEPRECATED)
+fillgray(x)       set fill color to x% gray (0=black, 1=white)
+fillrgb(r;g;b)    set fill color to the given RGB values (0<=x<=1)
+setfont(x)        set font (Postscript font name)
+setgrid(x)        set grid density (3=dense, 7=sparse)
+setline(x)        set line pattern (0..4)
+setres(x)         set X resolution to x (Z%10..Z)
+settext(x)        set font size in pts
+setdot(x)         set scatter dot size (default: 3)
+setzspace(x)      set z-mark spacing to every x'th mark
+key0(x)           key text for line pattern 0
+...
+key4(x)           key text for line pattern 4
+desc0(x)          first line of description text
+...
+desc4(x)          last line of description text
+
+Examples: frame([-4 4 1];[0 16 1]);
+          plot({x^2});
+          area(0;3;0);
+          draw()
+
+          settext(20)
+          setzspace(4)
+          grid3([-1 1 0.2];[-1 1 0.2];[-1 1 0.05])
+          plot3({(x^2)-y^2})
+          draw()
+*****
+
+.module(:nplot)
+Fun::0
+X0::Xn::Y0::Yn::0
+Tx::Ty::0
+S::[]
+Fm::[]
+Fo::"Times-Bold"
+Fs::14
+Ds::3
+Gt::3
+Z::500  :"canvas size"
+R::200  :"resolution"
+Xoff::50
+Yoff::25
+Rnd::0
+coord::{.d(Xoff+x*Z%R);.d(" ");.d(Yoff+y*Z%R)}
+mt::{coord(x;y);.p(" moveto")}
+lt::{coord(x;y);.p(" lineto")}
+mta::{.d(Xoff+x);.d(" ");.d(Yoff+y);.p(" moveto")}
+lta::{.d(Xoff+x);.d(" ");.d(Yoff+y);.p(" lineto")}
+mte::{.d(Xoff+Z);.d(" ");.d(Yoff+0);.p(" moveto")}
+stroke::{:[x;.p("closepath");[]];.p("stroke")}
+framebox::{mta(0;0);
+           lta(0;Z);
+           lta(Z;Z);
+           lta(Z;0);
+           stroke(1)}
+prolog::{.p("%!PS-Adobe-3.0");
+         .d("%%BoundingBox: 0 0 ");.d(Z+2*Xoff);.d(" ");.p(Z+2*Yoff);
+         .d("/Z ");.d(Z);.p(" def");
+         .d("/Xoff ");.d(Xoff);.p(" def");
+         .d("/Yoff ");.d(Yoff);.p(" def");
+         .p("newpath");
+         .p("0 setlinecap");
+         .p("0 setlinejoin");
+         .p("2 setlinewidth");
+         pstext(Fs);
+         framebox();
+         []}
+pp::{.d'x;.p("")}
+xmark::{pp("dup stringwidth pop 2 div ",x," exch sub ",Xoff,
+           " add ",Yoff," ",Fs," sub moveto")}
+ymark::{pp("dup stringwidth pop 46 exch sub ",x," ",Yoff," add moveto")}
+xgrid::{pp((x+Xoff)," ",Yoff," moveto");
+        pp((x+Xoff)," ",(Z+Yoff)," lineto");
+        xmark(x)}
+nxgrid::{pp((x+Xoff)," ",Yoff," moveto");
+         pp((x+Xoff)," ",(Z+Yoff)," lineto");
+         pp(" pop <>")}
+ygrid::{pp(Xoff," ",(x+Yoff)," moveto");
+        pp((Z+Xoff)," ",(x+Yoff)," lineto");
+        ymark(x)}
+pstext::{.p("/",Fo," findfont");.d(Fs::x);.p(" scalefont setfont")}
+settext::{Fs::x}
+setgrid::{Gt::x}
+setdot::{Ds::x}
+scale::{[s sn sx xx nn grid];
+        s::x@2;xx::Z%(%s)*nn::#(x@1)-*x;grid::y;
+        .p("newpath");
+        pstext(Fs-2);
+        .p("1 setlinecap");
+        .p("1 setlinejoin");
+        :[Gt;.p("[0 ",($Gt),"] 0 setdash");0];
+        .p("1 setlinewidth");
+        sn::*x+0.0;
+        sx::0.0;
+        (1+_nn%s){x;.d(:[Rnd;rndn(sn;Rnd);sn]);.p(" 20 string cvs");
+                  grid(sx);.p("show");
+                  sn::sn+s;sx::sx+xx}:*0;
+        pstext(Fs+2);
+        stroke(0);
+        .p("[] 0 setdash")}
+ascale::{[r];r::y-x;Rnd:::[r<1;_2+#ln(r)%2;3];scale(x,y,r%10;z)}
+cats::{[s];s::Z%#x;(!#x){ctext((s%2)+x*s;-15;y)}'x}
+newpath::{.p("newpath")}
+fill::{.p(" ",Fm," fill 0 setgray")}
+cfill::{.p("closepath");fill()}
+setfill::{Fm::x}
+setres::{R::x}
+setline::{:[0=x;.p("[] 0 setdash")
+          :|1=x;.p("[4 4] 0 setdash")
+          :|2=x;.p("[2 4] 0 setdash")
+          :|3=x;.p("[4 3 1 3] 0 setdash")
+          ;.p("[1 3 1 3 5 3] 0 setdash")]}
+setfont::{Fo::x}
+fillgray::{setfill(($x)," setgray")}
+fillrgb::{setfill(($x)," ",($y)," ",($z)," setrgbcolor")}
+gray::{fillgray(0.7)}
+color::{fillrgb(1.0;0.75;0)}
+epilog::{.p("showpage");[]}
+run::{[a b f];Fun::f::x;a::R%#z-y;b::y;{f((x%a)+b)}'!R}
+aplot::{[r l h ll lh];r::run(x;y;z);h::R%(lh::|/r)-l::ll::&/r;
+       prolog();ascale(y;z;xgrid);ascale(l;|/r;ygrid);
+       mt(0;0);(!R){lt(x;h*y-l)}'r;mte();stroke(1);epilog();
+       Rnd,ll,lh,0.1*#lh-ll}
+grid::{prolog();scale((X0::*x),(Xn::x@1),Tx::x@2;xgrid);
+                scale((Y0::*y),(Yn::y@1),Ty::y@2;ygrid)}
+frame::{prolog();scale((X0::*x),(Xn::x@1),Tx::x@2;xmark);
+                 scale((Y0::*y),(Yn::y@1),Ty::y@2;ymark)}
+cframe::{prolog();cats(x);X0::1;Xn::1+#x;
+         scale((Y0::*y),(Yn::y@1),Ty::y@2;ymark)}
+cgrid::{prolog();cats(x);scale((X0::1),(Xn::1+#x),1;nxgrid);
+        scale((Y0::*y),(Yn::y@1),Ty::y@2;ygrid)}
+replot::{[r h];h::R%#Yn-Y0;newpath();.p("1 setlinecap 1 setlinejoin");
+         mt(0;0);(!R){lt(x;h*y-Y0)}'S;mte();stroke(1)}
+plot::{S::run(x;X0;Xn);replot()}
+box::{newpath();mt(x;0);lt(x;y);lt(x+z;y);lt(x+z;0)}
+fillbox::{box(x;y;z);cfill();box(x;y;z);stroke(1)}
+barplot::{[w h];w::R%#x-X0;h::R%#Yn-Y0;(!#x){fillbox(x*w;y*h;w)}'x;framebox()}
+bar::{[w h];w::R%z;h::R%#Yn-Y0;fillbox(x*w;y*h;w)}
+barplot::{[s];s::#x;(!s){bar(x;y;s)}'x;framebox()}
+arc::{.p(" 0 360 arc closepath ")}
+circle::{newpath();coord(x;y);.d(" ");.d(Ds);arc();fill();
+         newpath();coord(x;y);.d(" ");.d(Ds);arc();stroke(0)}
+barplot::{[w h];w::R%#x;h::R%#Yn-Y0;(!#x){fillbox(x*w;y*h;w)}'x;framebox()}
+scplot::{[w h];w::R%#x-X0;h::R%#Yn-Y0;
+          (0.5+(!#x)+X0){circle(w*x-X0;h*y-Y0)}'x;stroke(0)}
+scplot2::{[w];w::R%#Xn-X0;h::R%#Yn-Y0;
+          (*'x){circle(w*x-X0;h*y-Y0)}'{x@1}'x;stroke(0)}
+vline::{[w h];newpath();w::R%#Xn-X0;h::R%#Yn-Y0;
+        mt(w*x-X0;h*-Y0);lt(w*x-X0;h*Fun(x)-Y0);stroke(0)}
+errbar::{[w h xx yy fn];newpath();w::R%#Xn-X0;h::R%#Yn-Y0;xx::*x;yy::x@1;fn::y;
+         mt(w*xx-X0;h*yy-Y0);lt(w*xx-X0;h*fn(xx)-Y0);stroke(0)}
+errplot::{[mod];mod::y;{errbar(x;mod)}'x}
+run::{[a b f];Fun::f::x;a::R%#z-y;b::y;{f((x%a)+b)}'!R}
+area::{[r h u v x0 xn];h::R%#Yn-Y0;u::R%#Xn-X0;v::(R%#Yn-Y0)*z-Y0;
+       x0::u*x-X0;xn::u*y-X0;
+       newpath();mt(x0;v);
+       (!R){:[~(x<x0)|x>xn;lt(x;h*y-Y0);[]]}'S;lt(xn;v);cfill();
+       replot();framebox()}
+xc::"0123456789ABCDEF"
+hextext::{,/{(xc@_(#x)%16),xc@_(#x)!16}'x}
+text::{mta(x;y);.d("<",hextext(z),">");.p("show")}
+ctext::{mta(x;y);.d("<",hextext(z),">");
+        .p(" dup stringwidth pop 2 div neg 0 rmoveto show")}
+rtext::{mta(x;y);.d("<",hextext(z),">");
+        .p(" dup stringwidth pop neg 0 rmoveto show")}
+title::{[s];pstext(_1.5*s::Fs);rtext(Z-10;Z-Fs;x);pstext(s)}
+lkey::{mta(Z-45;(Z-3*Fs)-(Fs*x)-Fs%3);setline(x);.p("35 0 rlineto stroke")}
+key0::{rtext(Z-50;Z-3*Fs;x);lkey(0)}
+key1::{rtext(Z-50;Z-4*Fs;x);lkey(1)}
+key2::{rtext(Z-50;Z-5*Fs;x);lkey(2)}
+key3::{rtext(Z-50;Z-6*Fs;x);lkey(3)}
+key4::{rtext(Z-50;Z-7*Fs;x);lkey(4)}
+desc0::{rtext(Z-15;Z-3*Fs;x)}
+desc1::{rtext(Z-15;Z-4*Fs;x)}
+desc2::{rtext(Z-15;Z-5*Fs;x)}
+desc3::{rtext(Z-15;Z-6*Fs;x)}
+desc4::{rtext(Z-15;Z-7*Fs;x)}
+draw::epilog
+
+:"***** 3D Plotter *****"
+
+Zoff::Z%2
+Zmin::1
+Zmax::5
+Zstep::1
+Zsp::1
+Zmarks::[]
+Sp::1
+Zp::0
+Za::0
+coord3::{.d(Za+Xoff+x*Z%R);.d(" ");.d(Za+Yoff+y*Z%R)}
+mt3::{coord3(x;y);.p(" moveto")}
+lt3::{coord3(x;y);.p(" lineto")}
+framebox3::{mta(0;0);
+            lta(Z%2;Z%2);
+            lta(Z+Z%2;Z%2);
+            lta(Z;0);
+            stroke(1);
+            mta(0;0);
+            lta(0;Z);
+            lta(Z%2;Z+Z%2);
+            lta(Z%2;Z%2);
+            stroke(0);
+            mta(Z%2;Z+Z%2);
+            lta(Z+Z%2;Z+Z%2);
+            lta(Z+Z%2;Z%2);
+            stroke(0)}
+prolog3::{.p("%!PS-Adobe-3.0");
+          .d("%%BoundingBox: 0 0 ");.d(_(1.5*Z)+2*Xoff);.d(" ");
+          .p(_(1.5*Z)+3*Yoff);
+          .d("/Z ");.d(Z);.p(" def");
+          .d("/Xoff ");.d(Xoff);.p(" def");
+          .d("/Yoff ");.d(Yoff);.p(" def");
+          .d("/Zoff ");.d(Zoff);.p(" def");
+          .p("newpath");
+          .p("0 setlinecap");
+          .p("0 setlinejoin");
+          .p("2 setlinewidth");
+          framebox3();
+          []}
+setzspace::{Zsp::x}
+zmark::{pp("dup stringwidth pop 46 exch sub ",x," 2 div add ",x," 2 div ",
+        Yoff," add Z add 15 add moveto")}
+xgrid3::{pp((x+Xoff+Zoff)," ",(Yoff+Zoff)," moveto");
+         pp((x+Xoff+Zoff)," ",(Z+Yoff+Zoff)," lineto");
+         pp((x+Xoff)," ",Yoff," moveto");
+         pp((x+Xoff+Z%2)," ",(Yoff+Z%2), " lineto");
+         xmark(x)}
+ygrid3::{pp((Xoff+Zoff)," ",(x+Yoff+Zoff)," moveto");
+         pp((Z+Xoff+Zoff)," ",(x+Yoff+Zoff)," lineto");
+         pp(Xoff," ",(x+Yoff)," moveto");
+         pp((Xoff+Zoff)," ",(x+Yoff+Zoff)," lineto");
+         ymark(x)}
+zgrid3::{pp((Xoff+x%2)," ",(Yoff+x%2)," moveto");
+         pp((Xoff+x%2)," ",(Z+Yoff+x%2)," lineto");
+         pp((Xoff+x%2)," ",(Yoff+x%2)," moveto");
+         pp((Z+Xoff+x%2)," ",(Yoff+x%2)," lineto");
+         zmark(x)}
+scale3::{[fs fm s sx sn xx nn grid];s::x@2;xx::Z%(%s)*nn::#(x@1)-*x;grid::y;
+         fs::{x;.d(sn);.p(" 20 string cvs");
+              grid(sx);.p("show");
+              sn::sn+s*Sp;sx::sx+xx*Sp};
+         fm::{.d(Zmarks@x);.p(" 20 string cvs");
+              grid(sx);.p("show");
+              sn::sn+s*Sp;sx::sx+xx*Sp;x+1};
+         .p("newpath");
+         pstext(Fs-2);
+         .p("1 setlinecap");
+         .p("1 setlinejoin");
+         :[Gt;.p("[0 ",($Gt),"] 0 setdash");0];
+         .p("1 setlinewidth");
+         sn::0.0+*x;
+         sx::0.0;
+         (1+_(nn%s)%Sp){:[Zmarks;fm(x);fs(x)]}:*0;
+         pstext(Fs+2);
+         stroke(0);
+         .p("[] 0 setdash")}
+run3::{[f a b];f::x;a::R%#z-y;b::y;{f((x%a)+b;Zp)}'!R}
+grid3::{prolog3();Sp::1;scale3((X0::*x),(Xn::x@1),Tx::x@2;xgrid3);
+                 Sp::1;scale3((Y0::*y),(Yn::y@1),Ty::y@2;ygrid3);
+                 Sp::Zsp;scale3((Zmin::*z),(Zmax::z@1),Zstep::z@2;zgrid3)}
+frame3::{prolog3();Sp::1;scale3((X0::*x),(Xn::x@1),Tx::x@2;xmark);
+                  Sp::1;scale3((Y0::*y),(Yn::y@1),Ty::y@2;ymark);
+                  Sp::Zsp;scale3((Zmin::*z),(Zmax::z@1),Zstep::z@2;zmark)}
+cgrid3::{prolog3();Sp::1;scale3((X0::*x),(Xn::x@1),Tx::x@2;xgrid3);
+                  Sp::1;scale3((Y0::*y),(Yn::y@1),Ty::y@2;ygrid3);
+                  Zmarks::z;
+                  Sp::Zsp;scale3((Zmin::0),(Zmax::(#z)-1),Zstep::1;zgrid3)}
+cframe3::{prolog3();Sp::1;scale3((X0::*x),(Xn::x@1),Tx::x@2;xmark);
+                   Sp::1;scale3((Y0::*y),(Yn::y@1),Ty::y@2;ymark);
+                   Zmarks::z;
+                   Sp::Zsp;scale3((Zmin::0),(Zmax::(#z)-1),Zstep::1;zmark)}
+replot3::{[r h];h::R%#Yn-Y0;newpath();.p("1 setlinecap 1 setlinejoin");
+          mt3(0;h*(*S)-Y0);(!R){lt3(x;h*y-Y0)}'S;mte();stroke(1)}
+plot3::{[fn adj];Zp::Zmin;Za::0;fn::x;adj::(Z%2)%(Zmax-Zmin)%Zstep;
+        {~x>Zmax}{Zp::x;S::run3(fn;X0;Xn);replot3();Za::Za+adj;x+Zstep}:~Zmin}
+.module(0)
+color()

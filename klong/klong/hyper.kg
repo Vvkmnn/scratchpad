@@ -1,0 +1,8 @@
+:"hyper operator; x=order; y,z=factors"
+hyper::{:[0=x;1+z
+        :|1=x;y+z
+        :|1=z;y
+        :|2=x;y*z
+        :|3=x;y^z
+        :|4=x;y^.f(x;y;z-1)
+        ;.f(x-1;y;.f(x;y;z-1))]}

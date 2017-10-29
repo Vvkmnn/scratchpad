@@ -1,0 +1,4 @@
+:"frequency table update:"
+:"add amount z to entry y of hash table x"
+:"e.g.: :{}{ftu(x;*y;1)}/{x;_6*.rn()}'!100"
+ftu::{[v];:[:_v::x?y;x,y,z;x,y,v+z]}

@@ -1,0 +1,169 @@
+:"3D-curve-plotting functions, outputting EPS"
+
+.comment("*****")
+frame([x0 xn sx];[y0 yn sy];[z0 zn sz])
+                   draw a frame with coordinates
+                   sx,sy = coordinate step
+cframe([x0 xn sx];[y0 yn sy];[z0 ... zn])
+                   like frame, but with custom z coordinates
+grid([x0 xn sx];[y0 yn sy];[z0 zn sz])
+                   like frame, but draw a grid
+cgrid([x0 xn sx];[y0 yn sy];[z0 ... zn])
+                   like grid, but with custom z coordinates
+plot(fn)           plot function in a given frame/grid
+text(x;y;text)     insert text into diagram; x,y in 0..499
+ctext(x;y;text)    insert centered text
+rtext(x;y;text)    insert right-aligned text
+draw()             finish drawing; not required with aplot
+setfont(x)         set font (Postscript font name)
+setgrid(x)         set grid density (3=dense, 7=sparse)
+setres(x)          set X resolution to x (Z%10..Z)
+settext(x)         set font size in pts
+setzspace(x)       set z-mark spacing to every x'th mark
+key0(x)            key text, line 1
+...
+key4(x)            key text, line 5
+
+Example: setzspace(4)
+         grid([-1 1 0.2];[-1 1 0.2];[-1 1 0.05])
+         plot({(x^2)-y^2})
+         draw()
+*****
+
+.module(:plot)
+X0::Xn::Y0::Yn::0
+Tx::Ty::0
+S::[]
+Fo::"Times-Bold"
+Fs::18
+Gt::3
+Z::500  :"canvas size"
+R::200  :"resolution"
+Xoff::50
+Yoff::25
+Zoff::Z%2
+Zmin::1
+Zmax::5
+Zstep::1
+Zsp::1
+Zmarks::[]
+Sp::1
+Zp::0
+Za::0
+coord::{.d(Za+Xoff+x*Z%R);.d(" ");.d(Za+Yoff+y*Z%R)}
+mt::{coord(x;y);.p(" moveto")}
+lt::{coord(x;y);.p(" lineto")}
+mta::{.d(Xoff+x);.d(" ");.d(Yoff+y);.p(" moveto")}
+lta::{.d(Xoff+x);.d(" ");.d(Yoff+y);.p(" lineto")}
+mte::{.d(Xoff+Z);.d(" ");.d(Yoff+0);.p(" moveto")}
+framebox::{mta(0;0);
+           lta(Z%2;Z%2);
+           lta(Z+Z%2;Z%2);
+           lta(Z;0);
+           .p("closepath");
+           .p("stroke");
+           mta(0;0);
+           lta(0;Z);
+           lta(Z%2;Z+Z%2);
+           lta(Z%2;Z%2);
+           .p("stroke");
+           mta(Z%2;Z+Z%2);
+           lta(Z+Z%2;Z+Z%2);
+           lta(Z+Z%2;Z%2);
+           .p("stroke")}
+prolog::{.p("%!PS-Adobe-3.0");
+         .d("%%BoundingBox: 0 0 ");.d(_(1.5*Z)+2*Xoff);.d(" ");
+         .p(_(1.5*Z)+3*Yoff);
+         .d("/Z ");.d(Z);.p(" def");
+         .d("/Xoff ");.d(Xoff);.p(" def");
+         .d("/Yoff ");.d(Yoff);.p(" def");
+         .d("/Zoff ");.d(Zoff);.p(" def");
+         .p("newpath");
+         .p("0 setlinecap");
+         .p("0 setlinejoin");
+         .p("2 setlinewidth");
+         framebox();
+         []}
+settext::{.p("/",Fo," findfont");
+          .d(Fs::x);.p(" scalefont setfont")}
+setgrid::{Gt::x}
+setzspace::{Zsp::x}
+pp::{.d'x;.p("")}
+xmark::{pp("dup stringwidth pop 2 div ",x," exch sub ",Xoff,
+           " add 10 moveto")}
+ymark::{pp("dup stringwidth pop 46 exch sub ",x," ",Yoff," add moveto")}
+zmark::{pp("dup stringwidth pop 46 exch sub ",x," 2 div add ",x," 2 div ",
+        Yoff," add Z add 15 add moveto")}
+xgrid::{pp((x+Xoff+Zoff)," ",(Yoff+Zoff)," moveto");
+        pp((x+Xoff+Zoff)," ",(Z+Yoff+Zoff)," lineto");
+        pp((x+Xoff)," ",Yoff," moveto");
+        pp((x+Xoff+Z%2)," ",(Yoff+Z%2), " lineto");
+        xmark(x)}
+ygrid::{pp((Xoff+Zoff)," ",(x+Yoff+Zoff)," moveto");
+        pp((Z+Xoff+Zoff)," ",(x+Yoff+Zoff)," lineto");
+        pp(Xoff," ",(x+Yoff)," moveto");
+        pp((Xoff+Zoff)," ",(x+Yoff+Zoff)," lineto");
+        ymark(x)}
+zgrid::{pp((Xoff+x%2)," ",(Yoff+x%2)," moveto");
+        pp((Xoff+x%2)," ",(Z+Yoff+x%2)," lineto");
+        pp((Xoff+x%2)," ",(Yoff+x%2)," moveto");
+        pp((Z+Xoff+x%2)," ",(Yoff+x%2)," lineto");
+        zmark(x)}
+scale::{[fs fm s sx sn xx nn grid];s::x@2;xx::Z%(%s)*nn::#(x@1)-*x;grid::y;
+        fs::{x;.d(sn);.p(" 20 string cvs");
+             grid(sx);.p("show");
+             sn::sn+s*Sp;sx::sx+xx*Sp};
+        fm::{.d(Zmarks@x);.p(" 20 string cvs");
+             grid(sx);.p("show");
+             sn::sn+s*Sp;sx::sx+xx*Sp;x+1};
+        .p("newpath");
+        settext(Fs-2);
+        .p("1 setlinecap");
+        .p("1 setlinejoin");
+        .p("[0 ",($Gt),"] 0 setdash");
+        .p("1 setlinewidth");
+        sn::*x+0.0;
+        sx::0.0;
+        (1+_(nn%s)%Sp){:[Zmarks;fm(x);fs(x)]}:*0;
+        settext(Fs+2);
+        .p("stroke");
+        .p("[] 0 setdash")}
+newpath::{.p("newpath")}
+setres::{R::x}
+setfont::{Fo::x}
+stroke::{.p("closepath");.p("stroke")}
+epilog::{.p("showpage");[]}
+run::{[f a b];f::x;a::R%#z-y;b::y;{f((x%a)+b;Zp)}'!R}
+grid::{prolog();Sp::1;scale((X0::*x),(Xn::x@1),Tx::x@2;xgrid);
+                Sp::1;scale((Y0::*y),(Yn::y@1),Ty::y@2;ygrid);
+                Sp::Zsp;scale((Zmin::*z),(Zmax::z@1),Zstep::z@2;zgrid)}
+frame::{prolog();Sp::1;scale((X0::*x),(Xn::x@1),Tx::x@2;xmark);
+                 Sp::1;scale((Y0::*y),(Yn::y@1),Ty::y@2;ymark);
+                 Sp::Zsp;scale((Zmin::*z),(Zmax::z@1),Zstep::z@2;zmark)}
+cgrid::{prolog();Sp::1;scale((X0::*x),(Xn::x@1),Tx::x@2;xgrid);
+                 Sp::1;scale((Y0::*y),(Yn::y@1),Ty::y@2;ygrid);
+                 Zmarks::z;
+                 Sp::Zsp;scale((Zmin::0),(Zmax::(#z)-1),Zstep::1;zgrid)}
+cframe::{prolog();Sp::1;scale((X0::*x),(Xn::x@1),Tx::x@2;xmark);
+                  Sp::1;scale((Y0::*y),(Yn::y@1),Ty::y@2;ymark);
+                  Zmarks::z;
+                  Sp::Zsp;scale((Zmin::0),(Zmax::(#z)-1),Zstep::1;zmark)}
+replot::{[r h];h::R%#Yn-Y0;newpath();.p("1 setlinecap 1 setlinejoin");
+         mt(0;h*(*S)-Y0);(!R){lt(x;h*y-Y0)}'S;mte();stroke()}
+plot::{[fn adj];Zp::Zmin;Za::0;fn::x;adj::(Z%2)%(Zmax-Zmin)%Zstep;
+       {~x>Zmax}{Zp::x;S::run(fn;X0;Xn);replot();Za::Za+adj;x+Zstep}:~Zmin}
+xc::"0123456789ABCDEF"
+hextext::{,/{(xc@_(#x)%16),xc@_(#x)!16}'x}
+text::{mta(x;y);.d("<",hextext(z),">");.p("show")}
+ctext::{mta(x;y);.d("<",hextext(z),">");
+        .p(" dup stringwidth pop 2 div neg 0 rmoveto show")}
+rtext::{mta(x;y);.d("<",hextext(z),">");
+        .p(" dup stringwidth pop neg 0 rmoveto show")}
+title::{[s];settext(1.25*s::Fs);rtext((Z+Z%2)-10;(Z+Z%2)-25;x);settext(s)}
+key0::{rtext((Z+Z%2)-10;(Z+Z%2)-45;x)}
+key1::{rtext((Z+Z%2)-10;(Z+Z%2)-60;x)}
+key2::{rtext((Z+Z%2)-10;(Z+Z%2)-75;x)}
+key3::{rtext((Z+Z%2)-10;(Z+Z%2)-90;x)}
+key4::{rtext((Z+Z%2)-10;(Z+Z%2)-105;x)}
+draw::epilog
+.module(0)

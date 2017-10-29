@@ -1,0 +1,91 @@
+:"various math functions"
+
+.comment("*****")
+.md          number of mantissa digits
+sgn(x)       sign of x
+rnd(x)       round half toward zero
+rndn(x;y)    round half toward zero after y decimal places
+th(x)        return a string representing x with decimal marks (1000's)
+gcd(x;y)     greatest common divisor
+lcm(x;y)     least common multiple
+exp(x)       exponential function
+ln(x)        natural logarithm
+sin(x)       sine function
+cos(x)       cosine function
+gamln(x)     ln of Gamma function
+gam(x)       Gamma function
+gamp(a;x)    regularized incomplete gamma function P(a,x)
+gamq(a;x)    regularized incomplete gamma function Q(a,x)
+lgam(a;x)    lower incomplete gamma function gamma(a,x)
+ugam(a;x)    upper incomplete gamma function Gamma(a,x)
+beta(a;b)    Beta function
+ibeta(x;a;b) incomplete Beta function Beta(x;a,b), max error: 1e-6
+rbeta(x;a;b) regularized incomplete Beta function I_x(a,b), max error: 1e-6
+matp(x;y)    product of matrixes x and y
+*****
+
+.l("const.kg")
+.module(:math)
+.md::{[i];i::0;{x<1}{i::i+1;x*10}:~.e;i}:()
+pi2::pi+pi
+pi0.5::pi%2
+pi1.5::1.5*pi
+sgn::{:[0=x;0:|x<0;-1;1]}
+rnd::{:[x<0;-1;1]*_(#x)+0.5}
+rndn::{rnd(x*10^y)%10^y}
+th::{{x,",",y}/|'|3:#|$_x}
+gcd::{:[0~y;x:|0~x;y:|x<y;gcd(x;y!x);gcd(y;x!y)]}
+lcm::{[d];d::gcd(x;y);_(x*y)%d}
+sqr::{[a];a::x;:[0=x;0;{(x+a%x)%2}:~a]}
+e.tlr::{[f p xx i r];f::i::1;p::xx::x;
+        {r::x+p%f;p::p*xx;i::i+1;f::f*i;r}:~1}
+exp::{:[x<0;%exp(-x):|~x<2;exp(x%2)^2;e.tlr(x)]}
+ln.tlr::{[xx yy xpy r];xx::(x-1)%x+1;yy::1;xpy::xx;
+         2*{r::x+xpy%yy;xpy::xpy*xx*xx;yy::2+yy;r}:~0.0}
+ln.apx::{[xx yy xpy r];xx::(x-1)%x+1;yy::1;xpy::xx;
+         2*y{r::x+xpy%yy;xpy::xpy*xx*xx;yy::2+yy;r}:*0.0}
+ln.big::{[a];a+ln(x%exp(a::ln.apx(x;5)))}
+ln::{:[~x>0;%0:|(0.1<x)&x<5;ln.tlr(x);ln.big(x)]}
+uc::{:[x<0;-uc(-x);x-pi2*_(#x)%pi2]}
+sin.tlr::{[xx yy r d a];xx::x;yy::3;a::0;
+          {d::(xx^yy)%*/1+!yy;r:::[a;x+d;x-d];a::~a;yy::2+yy;r}:~x}
+sin::{[xx];xx::uc(x);
+      xx:::[(~0>xx)&~xx>pi0.5;xx
+               :|(~pi0.5>xx)&~xx>pi1.5;pi-xx
+               :|(~pi>xx)&~xx>pi1.5;xx-pi
+               ;xx-pi2];
+     :[xx>pi;-sin.tlr(xx);sin.tlr(xx)]}
+cos::{sin(pi0.5-x)}
+gln.c::[76.18009173 -86.50532033 24.01409822
+        -1.231739516 0.00120858003 -0.00000536382]
+gamln::{[xx t i];xx::x-1;t::xx+5.5;t::((xx+0.5)*ln(t))-t;i::0;
+        t+ln(2.50662827465*6{xx::xx+1;s::x+(gln.c@i)%xx;i::i+1;s}:*1)}
+gam::{exp(gamln(x))}
+beta::{exp((gamln(x)+gamln(y))-gamln(x+y))}
+gser::{[gln a ap d xx];gln::gamln(x);a::ap::x;d::%x;xx::y;
+       ({ap::1+ap;d::(d*xx)%ap;x+d}:~d)*exp(((-xx)+a*ln(xx))-gln)}
+gcf::{[gln g a xx a0 a1 an ana anf b0 b1 fac n eps];a::x;xx::y;
+      gln::gamln(a);a0::1;a1::xx;b0::0;b1::1;fac::1;n::1;eps::(#$.e)-3;
+      g::{x;an::n;ana::an-a;a0::(a1+a0*ana)*fac;b0::(b1+b0*ana)*fac;
+          anf::an*fac;a1::(xx*a0)+anf*a1;b1::(xx*b0)+anf*b1;n::n+1;
+          fac:::[0~a1;fac;%a1];b1*fac}:~0;
+      g*exp(((-xx)+a*ln(xx))-gln)}
+gamp::{:[y<x+1;:[y~0;0;gser(x;y)];1-gcf(x;y)]}
+gamq::{1-gamp(x;y)}
+lgam::{gamp(x;y)*gam(x)}
+ugam::{gamq(x;y)*gam(x)}
+bcf::{[a b xx d am ap app bm bp bpp bz em m qab qap qam tem];
+      xx::x;a::y;b::z;am::1;bm::1;qab::a+b;qap::a+1;qam::a-1;
+      bz::1-(qab*xx)%qap;m::1;
+      {em::m;tem::em+em;d::((em*b-m)*xx)%(qam+tem)*a+tem;ap::x+d*am;
+       bp::bz+d*bm;d::-((a+em)*(qab+em))*xx%(a+tem)*qap+tem;
+       app::ap+d*x;bpp::bp+d*bz;am::ap%bpp;bm::bp%bpp;bz::1;m::m+1;
+       rndn(app%bpp;6)}:~1}
+rbeta::{[bt a b xx];xx::x;a::y;b::z;
+        bt:::[(0~xx)|1~xx;0
+              ;exp(((gamln(a+b)-gamln(a))-gamln(b))+(a*ln(xx))+b*ln(1-xx))];
+        :[xx<(a+1)%a+b+2;bt*bcf(xx;a;b)%a;
+                       1-bt*bcf(1-xx;b;a)%b]}
+ibeta::{rbeta(x;y;z)*beta(y;z)}
+matp::{[a b];b::+y;{a::x;+/'{a*x}'b}'x}
+.module(0)

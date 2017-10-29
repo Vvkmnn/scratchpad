@@ -1,0 +1,14 @@
+:"find root of function F using regula falsi method"
+:"Usage: regf(fn;x0;x1)"
+:"       where x0,x1 ~= x in fn(x) = 0"
+.l("math.kg")
+.module(:regf)
+F::{1}
+R::{4}
+iter::{[q x1 x2 y1 y2];x1::x@0;x2::x@1;y1::F(x1);y2::F(x2);
+       q:::[0~y1-y2;x2;((x1*y2)-(x2*y1))%y2-y1];x2,q}
+regf::{F::x;(iter:~y,z)@0}
+niter::{[q x1 x2 y1 y2];x1::x@0;x2::x@1;y1::F(x1);y2::F(x2);
+        q:::[0~y1-y2;x2;((x1*y2)-(x2*y1))%y2-y1];rndn(x2;R),rndn(q;R)}
+nregf::{F::x;R::y;(niter:~z)@0}
+.module(0)

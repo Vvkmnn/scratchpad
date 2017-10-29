@@ -1,0 +1,27 @@
+:"IQ fact generator; potentially depressing."
+:"Usage: iqfacts(iq;window;population)"
+:"When in doubt, use iqfacts(100;13.5;1000000)"
+.l("stat")
+iq::100
+window::13.5
+population::1e6
+s::{cdf((x-100)%15)}
+r::{%#s(x+y-1)-s(x-y-1)}
+ratio::{:[x<100;1-ratio(200-x;y);0.5*(s(x+y-1)-s(x))%s(x)-s(x-y-1)]}
+round.small::{[i];i::1;{0=_x}{i::i*10;x*10}:~x;rnd(x*i)%i}
+round::{:[x<0.9;round.small(x);1-round.small(1-x)]}
+roundpc::{[f i];i::_100*x;f::(100*x)-i;i+round(f)}
+iqfacts::{[R H L];.d("You have to meet ");.d(th(rnd(R::r(x;y))));
+ .d(" people to find <B>one</B> inside of your window, and there is a ");
+ .d(rnd(1000*ratio(x;y))%10);.d("%");
+ .d(" probability that this person will be more intelligent than you.");
+ .d(" When meeting a random person, there is a ");
+ .d(roundpc(L::s(x-y-1)));.d("%");
+ .d(" chance that they will not understand you (below your lower");
+ .d(" limit), and there is a ");
+ .d(roundpc(H::1-s(x+y-1)));.d("%");
+ .p(" chance that you will not understand them (above your upper limit).");
+ .d("In a population of ");.d(th(z));.d(", there are ");
+ .d(th(rnd(z%R)));.d(" people inside of your window, ");
+ .d(th(rnd(z*L)));.d(" below your lower limit, and ");
+ .d(th(rnd(z*H)));.p(" above your upper limit.")}

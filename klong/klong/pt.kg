@@ -1,0 +1,14 @@
+:"table printers: pt0..pt3; try pt2(+[4 5]:^*\1+!20)"
+.module(:pt)
+fmtc::{(-|/{#$x}'x)$x}
+fmtt::{+fmtc'+x}
+row0::{{.d(" ");.d(x)}'x;.p("")}
+pt0::{{row0'x}:(fmtt(x));[]}
+lin1::{.d("+");{.d((1+#x):^"-")}'x;.p("-+")}
+row1::{.d("|");{.d(" ");.d(x)}'x;.p(" |")}
+pt1::{{lin1(*x);row1'x;lin1(*x)}:(fmtt(x));[]}
+row2::{.d("|");{.d(" ");.d(x);.d(" |")}'x;.p("")}
+lin2::{.d("+");{.d((2+#x):^"-");.d("+")}'x;.p("")}
+pt2::{{lin2(*x);row2'x;lin2(*x)}:(fmtt(x));[]}
+pt3::{{lin2(*x);{row2(x);lin2(x)}'x}:(fmtt(x));[]}
+.module(0)

@@ -1,0 +1,12 @@
+:"find root of function F using bisection"
+:"Usage: bisect(fn)"
+.module(:bisect)
+F::{1}
+x0::0
+x1::0
+b::0
+fx::0
+findint::{{F(x)<0}{x*2}:~1}
+iter::{x;b::(x0+x1)%2;fx::F(b);x0:::[fx<0;b;x0];x1:::[fx<0;x1;b];x1-x0}
+bisect::{F::x;x0::0;x1::findint();iter:~0;x0}
+.module(0)

@@ -1,0 +1,13 @@
+:"set-theoretic operators"
+:"P(x)      = power set"
+:"X(x;y)    = cartesian product"
+:"U(x;y)    = union"
+:"V(x;y)    = intersection"
+.module(:set)
+t::{[a];{x_a}'!#a::x}
+c::{[n];:[0=n::x;[]:|1=x;,'y;,/{[t];t::x;{(,*t),x}'c(n-1;1_t)}'t(y)]}
+P::{?:[[]~x;[];[[]],,/(1+!#x){c(x;y)}'((#x),#x):^x]}
+X::{[b];b::y;,/{[a];a::x;{a,x}'b}'x}
+U::{?x,y}
+V::{[a];a::x;x@,/{a?x}'y}
+.module(0)

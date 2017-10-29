@@ -1,0 +1,7 @@
+:"help utility"
+.l("findstr.kg")
+.module(:help)
+helpdb::.l("helpdb")
+help::{[h m];h::x;m::&{(~[]~findstr(*x;h))|~[]~findstr(x@1;h)}'helpdb;
+       {.d(6$*helpdb@x);.d((helpdb@x)@2);.p("")}'m;[]}
+.module(0)

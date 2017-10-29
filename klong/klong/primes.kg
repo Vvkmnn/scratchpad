@@ -1,0 +1,3 @@
+:"test for primality/find primes"
+prime::{:[[0 1]?x;0:|[2 3 5]?x;1;&/x!'2,3+2*!_1+(x^0.5)%2]}
+primes::{&prime'!_1+x}

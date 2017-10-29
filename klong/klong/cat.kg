@@ -1,0 +1,3 @@
+:"simplicistic cat(1) utility"
+cat::{.mi{.p(x);.rl()}:~.rl()}
+:[.a~[];cat();{.fc(.ic(x));cat()}'.a]

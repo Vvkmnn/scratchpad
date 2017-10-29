@@ -1,0 +1,72 @@
+:"various statistics functions"
+:"kp(x;y)          x-permutation of y"
+:"kc(x;y)          x-combinations of y"
+:"mu(x)            mean"
+:"Q(x;y)           x'th quantile of y; 0<=x<=1"
+:"M(x)             median"
+:"mod(x)           mode"
+:"rng(x)           range"
+:"var(x)           variance"
+:"cov(x;y)         covariance"
+:"cor(x;y)         correlation coefficient"
+:"sgm(x)           standard deviation (sigma)"
+:"svar(x)          sample variance"
+:"ssgm(x)          sample sigma"
+:"zed(x;y)         z-score of x given y"
+:"erf(x)           Gauss error function"
+:"pdf(x)           probability density; y=mu; z=sigma"
+:"ndf(x)           standard normal distribution function"
+:"cdf(x)           cumulative standard normal distribution"
+:"qf(x)            quantile function (inverse cdf)"
+:"chi2(E;O)        compute chi^2 statistic; E=expected, O=observed"
+:"chi2.pdf(k;x)    chi square PDF"
+:"chi2.cdf(k;x)    chi square CDF"
+:"chi2.qf(k;x)     chi square QF (slow!!)"
+:"t.pdf(nu;x)      Student's t distribution PDF"
+:"t.cdf(nu;x)      Student's t distribution CDF (for nu>=3)"
+:"t.qf(nu;x)       Student's t distribution QF (tends to diverge!)"
+:"rcp(A;B|A;B'|A') reverse conditional probability P(A|B)"
+.comment("EOC")
+Error function approximation by Abramowitz/Stegun, max error = 1.5×10-7.
+T distribution approximation by Zogheib and Elsaheli, max error = 0.0029
+EOC
+.l("math.kg")
+.l("regf.kg")
+.module(:stat)
+kp::{*/(y-x)+1+!x}
+kc::{:[0~x;1;_kp(x;y)%*/1+!x]}
+mu::{(+/x)%#x}
+S::{:[y<0;0:|~y<#x;*|x;x@y]}
+Q::{[s i];s::y@<y;:[i=_i::x*#y;mu(S(s;_i),S(s;_i-1));S(s;_i)]}
+M::{Q(0.5;x)}
+qrt::{Q(0.25;x),Q(0.5;x),Q(0.75;x),Q(1;x)}
+mod::{[q];*'q@(#'q)?|/#'q::1_(*'=x):_x}
+rng::{[s];(*|s)-*s::x@<x}
+cov::{((+/x*y)%#x)-mu(x)*mu(y)}
+var::{cov(x;x)}
+var::{((+/x*x)%#x)-mu(x)^2}
+cor::{cov(x;y)%var(x)}
+sgm::{var(x)^0.5}
+svar::{((+/{x*x}'x)%(#x)-1)-mu(x)^2}
+ssgm::{svar(x)^0.5}
+zed::{(x-mu(y))%sgm(y)}
+pdf::{(%z*(2*pi)^0.5)*exp(-((x-y)^2)%2*z^2)}
+ndf::{pdf(x;0;1)}
+ndf::{(%(2*pi)^0.5)*exp(-(x^2)%2)}
+efc::[0.0705230784 0.0422820123 0.0092705272
+      0.0001520143 0.0002765672 0.0000430638]
+erf::{:[x<0;-erf(-x);1-%(1+/efc**\6:^x)^16]}
+cdf::{0.5+0.5*erf(x%2^0.5)}
+qf::{[p];p::x;regf({cdf(x)-p};0;1)}
+chi2::{+/x{((y-x)^2)%x}'y}
+chi2.pdf::{:[0~y;0;(%((2^x%2)*gam(x%2)))*(y^(x%2)-1)*e^-y%2]}
+chi2.cdf::{gamp(x%2;y%2)}
+chi2.qf::{[nu p];nu::x;p::y;regf({chi2.cdf(nu;x)-p};0;nu)}
+t.pdf::{(gam((x+1)%2)%((x*pi)^0.5)*gam(x%2))*(1+(y^2)%x)^-(x+1)%2}
+t.cdf::{z1::y*(1-%4*x)*(1+(%2*x)*y^2)^-0.5;
+        %(1+e^((0.000345*z1^5)-(0.069647*z1^3))-1.604326*z1)}
+t.qf::{[nu p];nu::x;p::y;regf({t.cdf(nu;x)-p};0;1)}
+beta.pdf::{((x^y-1)*((1-x)^z-1))%beta(y;z)}
+beta.cdf::rbeta
+rcp::{(x*y)%(x*y)+(1-x)*1-z}
+.module(0)

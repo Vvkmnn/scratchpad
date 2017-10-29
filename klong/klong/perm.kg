@@ -1,0 +1,2 @@
+:"generate permutations of a list/string"
+perm::{:[2>#x;x;,/{(*x),:\perm(1_x)}'(-!#x):+'((#x),#x):^x]}

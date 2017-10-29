@@ -1,0 +1,9 @@
+:"find root of function F using secant method"
+:"Usage: secant(fn;x0;x1)"
+:"       where x0,x1 ~= x in fn(x) = 0"
+.module(:secant)
+F::{1}
+iter::{[q x1 x2 y1 y2];x1::x@0;x2::x@1;y1::F(x1);y2::F(x2);
+       q:::[0~y1-y2;x2;(x1-y1*(x1-x2)%y1-y2)];x2,q}              
+secant::{F::x;(iter:~y,z)@0}
+.module(0)
