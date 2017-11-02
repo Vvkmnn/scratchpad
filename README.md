@@ -12,6 +12,7 @@ scratchpad/
 │   └── bash-commands/                 : Some of the most popular Bash commands!
 │
 ├── clojure/
+│   ├── cljs-quickstart/               : The (Google) ClojureScript quickstart
 │   └── clojure-code-demo/             : A demo for Vscode & Clojure integration
 │
 ├── excel/                             
