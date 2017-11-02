@@ -122,6 +122,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Google
+goog/
+.map
+
 # Runtime data
 pids
 *.pid
