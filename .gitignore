@@ -113,6 +113,9 @@ venv.bak/
 
 ## Clojure
 Leiningen.gitignore
+cljs_deps.js
+core.js
+**/goog/**
 
 ## Node
 # Logs
