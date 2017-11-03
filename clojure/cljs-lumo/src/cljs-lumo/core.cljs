@@ -1,5 +1,9 @@
-(ns cljs-lumo.core)
+(ns cljs-lumo.core
+  (:require [cljs.nodejs :as nodejs]))
 
-(enable-console-print!)
+(nodejs/enable-util-print!)
 
-(println "Hello world!")
+(defn -main [& args]
+  (println "Hello world!"))
+
+(set! *main-cli-fn* -main)

@@ -1,9 +1,8 @@
 ; The lumo builder.
-; Similar to the standard builder, except for the advanced optimizations
-(require '[lumo.build.api :as b])
+(require 'lumo.build.api)
 
-(b/build "src"
-  {:main 'cljs-lumo.core
-   :output-to "main.js"
-   :optimizations :advanced
-   :target :nodejs})
+(lumo.build.api/build "src"
+                      {:main 'cljs-lumo.core
+                       :output-to "out/main.js"
+                       :optimizations :advanced
+                       :target :nodejs})
