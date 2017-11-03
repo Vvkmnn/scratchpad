@@ -123,6 +123,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # Google
+cljs/
+process/
 goog/
 .map
 

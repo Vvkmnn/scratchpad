@@ -1,6 +1,6 @@
 ; Hello Node!
 
-(ns hello-world.core
+(ns cljs-node.core
   (:require [cljs.nodejs :as nodejs]))
 
 (nodejs/enable-util-print!)
