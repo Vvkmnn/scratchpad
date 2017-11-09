@@ -2,6 +2,7 @@ private/
 bin/
 **/bin
 .icloud
+cljs-node/
 
 ## Python
 # Byte-compiled / optimized / DLL files
