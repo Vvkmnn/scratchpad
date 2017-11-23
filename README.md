@@ -25,7 +25,7 @@ scratchpad
 │   └── ohshitgit                     : Oh shit git!
 │
 ├── javascript
-│   ├── backpropNEAT                  : "Neural Network Evolution Playground with Backprop NEAT" - @hardmaru
+│   ├── backpropNEAT                  : "Playground with Backprop NEAT" - @hardmaru
 │   ├── ItsyBitsyDataStructures       : "All the things you didn't know you wanted to know about data structures" - @thejameskyle
 │   └── TheSuperTinyCompiler          : "Possibly the smallest compiler ever" - @thejameskyle
 │
@@ -50,6 +50,7 @@ scratchpad
 │   ├── algorithms                    : "Minimal examples of data structures and algorithms in Python" - @keon
 │   ├── Bayes                         : Playing around with some Bayesian stats
 │   ├── codeWars                      : Stuff from my Codewars 
+│   ├── evolutionaryStrategies        : "Notebooks and various random fun" - @karpathy
 │   ├── hackerRank                    : Stuff from my Hackerrank
 │   ├── intermediatePython            : Notes from someone who is better at Python than me
 │   ├── kaggle                        : Kaggle attempts
@@ -66,5 +67,6 @@ scratchpad
 │   └── TiesAsAService                : The code behind my pet project for Hootsuite, focused on MRR modeling and simulation via Monte Carlo
 │
 └── tableau
+    ├── practice                      : Tableau workbooks rebuilt for practice.
     └── functions                     : Stuff from Tableau I felt like keeping
 ```
