@@ -37,3 +37,6 @@
 [submodule "python/tensorFlowExamples"]
 	path = python/tensorFlowExamples
 	url = https://github.com/aymericdamien/TensorFlow-Examples
+[submodule "python/pytudes"]
+	path = python/pytudes
+	url = https://github.com/norvig/pytudes.git

@@ -56,6 +56,7 @@ scratchpad
 │   ├── kaggle                        : Kaggle attempts and notes.
 │   ├── kerasDeepLearning             : "Introduction to Deep Neural Networks with Keras and Tensorflow" - @leriomaggio
 │   ├── pyCrumbs                      : "Bits and bytes of Python from the Internet" - @kirang89
+│   ├── pytudes                       : "Python programs to practice or demonstrate skills." - @norvig
 │   └── tensorflowExamples            : "TensorFlow Tutorial and Examples for Beginners with Latest APIs" - @aymericdamien 
 │
 ├── r
