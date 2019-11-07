@@ -54,4 +54,6 @@
 [submodule "python/pytudes"]
 	path = python/pytudes
 	url = https://github.com/norvig/pytudes.git
-
+[submodule "python/cl-chess"]
+	path = python/cl-chess
+	url = https://github.com/marcusbuffett/command-line-chess.git

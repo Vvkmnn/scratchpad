@@ -1,7 +1,7 @@
 scratchpad
 ======
 
-Code I'm tinkering with, typically borrowed from kind strangers.
+Code I'm tinkering with, sometimes borrowed from strangers on the internet.
 
 
 ```
@@ -50,6 +50,7 @@ scratchpad
 │   ├── algorithms                    : "Minimal examples of data structures and algorithms in Python" - @keon
 │   ├── Bayes                         : Playing around with some Bayesian stats.
 │   ├── codeWars                      : Stuff from my Codewars adventures.
+│   ├── cl-chess                      : "A python program to play chess against an AI in the terminal." =  @marcusbuffet
 │   ├── evolutionaryStrategies        : "Notebooks and various random fun" - @karpathy
 │   ├── hackerRank                    : Stuff from my Hackerrank games.
 │   ├── intermediatePython            : Notes from someone who is better at Python than me
