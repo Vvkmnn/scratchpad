@@ -55,6 +55,7 @@ scratchpad
 │   ├── intermediatePython            : Notes from someone who is better at Python than me
 │   ├── kaggle                        : Kaggle attempts and notes.
 │   ├── kerasDeepLearning             : "Introduction to Deep Neural Networks with Keras and Tensorflow" - @leriomaggio
+│   ├── leetCode                      : A few Python3 solutions to some Leetcode problems
 │   ├── pyCrumbs                      : "Bits and bytes of Python from the Internet" - @kirang89
 │   ├── pytudes                       : "Python programs to practice or demonstrate skills." - @norvig
 │   └── tensorflowExamples            : "TensorFlow Tutorial and Examples for Beginners with Latest APIs" - @aymericdamien 

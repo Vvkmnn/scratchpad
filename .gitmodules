@@ -1,3 +1,11 @@
+[submodule "bash/bash-guide"]
+	path = bash/bash-guide
+	url = https://github.com/Idnan/bash-guide.git
+
+[submodule "clojure/clojure-code-demo"]
+	path = clojure/clojure-code-demo
+	url = https://github.com/indiejames/clojure-code-demo.git
+
 [submodule "julia/JuliaByExample"]
 	path = julia/JuliaByExample
 	url = https://github.com/samuelcolvin/JuliaByExample.git
@@ -26,6 +34,11 @@
 	path = python/pyCrumbs
 	url = https://github.com/kirang89/pycrumbs
 
+[submodule "python/Heroku"]
+	path = python/Heroku
+	url = https://github.com/heroku/python-getting-started.git
+
+
 [submodule "python/kerasDeepLearning"]
 	path = python/kerasDeepLearning
 	url = https://github.com/leriomaggio/deep-learning-keras-tensorflow
@@ -37,6 +50,8 @@
 [submodule "python/tensorFlowExamples"]
 	path = python/tensorFlowExamples
 	url = https://github.com/aymericdamien/TensorFlow-Examples
+
 [submodule "python/pytudes"]
 	path = python/pytudes
 	url = https://github.com/norvig/pytudes.git
+
