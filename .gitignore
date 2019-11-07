@@ -1,7 +1,7 @@
 private/
 bin/
 **/bin
-.icloud
+*.icloud
 cljs-node/
 
 ## Python
