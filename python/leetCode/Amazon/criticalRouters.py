@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-
+"""
+A modified solution to https://leetcode.com/discuss/interview-question/417213/
+"""
 
 def criticalRouters(numRouters: int, numLinks: int, Links: [[int, int]]):
     class Router:
@@ -30,7 +32,7 @@ def criticalRouters(numRouters: int, numLinks: int, Links: [[int, int]]):
             if top._id in visited:
 
                 # Skip, already  in the path
-                continue
+                pass
 
             # If not visited and not the Target
             elif top._id != targetNode._id:
@@ -38,8 +40,12 @@ def criticalRouters(numRouters: int, numLinks: int, Links: [[int, int]]):
                 # Remember visiting; add to set
                 visited |= {top._id}  # True  # 1
 
-                # Append its links to the stack to search
+                # Append its links to the stack to search next
+                # This is the depth part of dfs
+                # Perhaps if prepend, like a BFS?
                 stack += top.links
+
+            print(rootNode._id, targetNode._id, visited, [_._id for _ in stack])
 
         # Return number of searched nodes until the targetNode from rootNode
         return len(visited)
@@ -63,8 +69,6 @@ def criticalRouters(numRouters: int, numLinks: int, Links: [[int, int]]):
     # Core {{{
     criticals = []
 
-    print([router._id for router in routerList])
-
     # For every router from 0 to numRouters
     for i in range(numRouters):
 
@@ -85,7 +89,6 @@ def criticalRouters(numRouters: int, numLinks: int, Links: [[int, int]]):
 
         # Check length of DFS to target router
         numberOfVisitedRouters = depthFirstSearch(rootNode, targetNode)
-        # print(i, rootNode._id, targetNode._id, numberOfVisitedRouters)
 
         # If visited path is faster than stepping through every router,
         # DFS has found no special paths between two routers, so do nothing
@@ -95,6 +98,8 @@ def criticalRouters(numRouters: int, numLinks: int, Links: [[int, int]]):
 
     # }}}
 
+    # If these routers were removed, cannot navigate the map in less than Nodes - 1 steps;
+    # something has gone missing
     return criticals
 
 
