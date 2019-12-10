@@ -117,6 +117,7 @@ Leiningen.gitignore
 cljs_deps.js
 core.js
 **/goog/**
+**/cljs-node/out/*.js
 
 ## Node
 # Logs

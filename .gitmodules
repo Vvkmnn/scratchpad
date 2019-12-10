@@ -22,10 +22,6 @@
 	path = javascript/backpropNEAT
 	url = https://github.com/hardmaru/backprop-neat-js
 
-[submodule "javascript/backpropNEAT"]
-	path = javascript/backpropNEAT
-	url = https://github.com/hardmaru/backprop-neat-js
-
 [submodule "python/algorithms"]
 	path = python/algorithms
 	url = https://github.com/keon/algorithms
@@ -57,3 +53,6 @@
 [submodule "python/cl-chess"]
 	path = python/cl-chess
 	url = https://github.com/marcusbuffett/command-line-chess.git
+[submodule "bash/git-jack"]
+	path = bash/git-jack
+	url = https://github.com/tardypad/github-jack.git
