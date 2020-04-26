@@ -56,3 +56,6 @@
 [submodule "bash/git-jack"]
 	path = bash/git-jack
 	url = https://github.com/tardypad/github-jack.git
+[submodule "markdown/e-p-s-k"]
+	path = markdown/e-p-s-k
+	url = https://github.com/mtdvio/every-programmer-should-know.git

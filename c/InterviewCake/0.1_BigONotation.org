@@ -1,0 +1,43 @@
+#+TITLE: 0.1 Big O Notation
+
+* Introduction
+
+Big O notation describes how long an algorithm takes to run.
+
+We use to express the following 3 things:
+
+1. *How quickly the runtime grows*:
+   - It's hard to pin down the exact runtime of an algorithm, since it depends on the speed of the processor, current load, resource availability, etc.
+   - So instead of talking about the runtime directly, we use big O notation to talk about how quickly the runtime grows.
+2. *Relative to the input*:
+   - If we were measuring our runtime directly, we could express our speed in seconds.
+   - Since we're measuring how quickly our runtime grows, we need to express our speed in terms of...something else.
+   - With Big O notation, we use the size of the input, which we call $n$.
+   - Now we can say things like:
+     + The runtime grows on the order of the size of the input: */(O(n)/)*
+     + On the order of the square of the size of the input: */(O(n^2)/)*
+3. *As the input gets arbitrarily large*:
+   - Our algorithm may have steps that seem expensive when $n$ is small but are eclipsed eventually by other steps as $n$ gets huge.
+   - This is why "big O analysis" is sometimes called "asymptotic analysis.
+
+** Examples
+
+*** $O(1)$
+
+This function runs in $O(1)$ time (or "constant time") relative to its input. The input array could be 1 item or 1,000 items, but this function would still just require one "step."
+
+#+BEGIN_SRC C
+int items[] = { 1, 2, 3 };
+
+void printFirstItem(const int* items)
+{
+    printf("%d\n", items[0]);
+}
+
+int main() {
+    printFirstItem(items);
+}
+#+END_SRC
+
+#+RESULTS:
+: 1

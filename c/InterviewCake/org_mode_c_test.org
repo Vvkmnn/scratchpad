@@ -1,0 +1,31 @@
+#+TITLE: C_TEST
+
+#+tblname: somedata
+| nb    | sqr | noise | 
+|-------+-----+-------+
+| zero  |   0 |  0.23 | 
+| one   |   1 |  1.31 | 
+| two   |   4 |  4.61 | 
+| three |   9 |  9.05 | 
+| four  |  16 | 16.55 | 
+
+#+BEGIN_SRC C :var tbl=somedata
+/* https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-C.html */
+
+int main()
+{
+  for (int i=0; i<somedata_rows; i++) {
+    printf ("%2d %7s ", i, somedata_h(i,"nb"));
+    for (int j=1; j<somedata_cols; j++) {
+      const char* cell = somedata[i][j];
+      printf ("%5s %5g ", cell, 1000*atof(cell));
+    }
+    printf("Fuck\n");
+  }
+  return 0;
+}
+
+#+END_SRC
+
+#+RESULTS:
+
