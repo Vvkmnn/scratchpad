@@ -11,6 +11,10 @@ scratchpad
 │   ├── bash-guide                    : A quick guide to the Bash Shell.
 │   └── bash-commands                 : Some of the most popular Bash commands!
 │
+├── c
+│   ├── HackerRank                    : Notes for solving HackerRank problems
+│   └── InterviewCake                 : Notes for solving InterviewCake problems
+│
 ├── clojure
 │   ├── cljs-quickstart               : The (Google) ClojureScript quickstart.
 │   └── clojure-code-demo             : A demo for Vscode Clojure integration.
